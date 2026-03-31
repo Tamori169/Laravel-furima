@@ -155,7 +155,6 @@ return [
             'confirmPassword' => true,
             // 'window' => 0,
         ]),
-        Features::login(),
     ],
 
 ];

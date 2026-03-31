@@ -2,7 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-<link rel="stylesheet" href="{{ asset('css/verify-email.css') }}">
+<link rel="stylesheet" href="{{ asset('css/auth/verify-email.css') }}">
 @endsection
 
 @section('content')

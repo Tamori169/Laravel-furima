@@ -20,3 +20,17 @@ Route::get('/setup-profile', function () {
 Route::get('/login', function () {
     return view('auth.login');
 })->middleware(['verified']);
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/item/{item_id}/comment',[CommentController::class,'store'])
+    ->name('comment.store');
+    Route::get('/purchase/{item_id}',[OrderController::class,'create'])
+    ->name('order.create');
+    Route::get('/sell',[ItemController::class,'create'])
+    ->name('item.create');
+    Route::get('/mypage',[ProfileController::class,'show'])
+    ->name('profile.show');
+});
+
+Route::get('/',[ItemController::class,'index'])
+    ->name('item.index');
