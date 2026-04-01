@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $myId = auth()->id();
 

@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Contracts\VerifyEmailResponse;
+
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -34,8 +36,17 @@ class FortifyServiceProvider extends ServiceProvider
         // メール認証成功直後のリダイレクト先を指定
         $this->app->instance(
             VerifyEmailResponse::class, new class implements VerifyEmailResponse {
-            public function toResponse($request) {
-                return redirect('/setup-profile');
+                public function toResponse($request) {
+                    return redirect('/setup-profile');
+                }
+            }
+        );
+
+        // ログアウト後のリダイレクト先をカスタマイズ
+        $this->app->instance(
+            LogoutResponse::class, new class implements LogoutResponse {
+                public function toResponse($request) {
+                    return redirect('/');
                 }
             }
         );

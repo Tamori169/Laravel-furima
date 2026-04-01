@@ -44,7 +44,7 @@ class Item extends Model
         return $this->hasOne(Order::class);
     }
 
-    public function favoritedUsers()
+    public function favorites()
     {
         return $this->belongsToMany(User::class, 'favorites')
                     ->withTimestamps();

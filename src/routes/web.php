@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/setup-profile', function () {
     return view('profiles.form');
 })->middleware(['auth', 'verified']);
-
-Route::get('/login', function () {
-    return view('auth.login');
-})->middleware(['verified']);
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/item/{item_id}/comment',[CommentController::class,'store'])
