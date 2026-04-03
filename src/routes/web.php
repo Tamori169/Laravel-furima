@@ -21,6 +21,11 @@ Route::get('/setup-profile', function () {
     return view('profiles.form');
 })->middleware(['auth', 'verified']);
 
+Route::get('/',[ItemController::class,'index'])
+    ->name('item.index');
+Route::get('/item/{item_id}',[ItemController::class,'show'])
+    ->name('item.show');
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/item/{item_id}/comment',[CommentController::class,'store'])
     ->name('comment.store');
@@ -31,10 +36,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mypage',[ProfileController::class,'show'])
     ->name('profile.show');
 });
-
-Route::get('/',[ItemController::class,'index'])
-    ->name('item.index');
-Route::get('/item/{item_id}',[ItemController::class,'show'])
-    ->name('item.show');
-Route::get('/search',[ItemController::class,'search'])
-    ->name('item.search');

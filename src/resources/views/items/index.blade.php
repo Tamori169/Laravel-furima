@@ -5,7 +5,10 @@
 @endsection
 
 @section('nav')
-<form class="search-form" method="get" action="{{ route('item.search') }}">
+<form class="search-form" method="get" action="{{ route('item.index') }}">
+    @if(request('tab') === 'mylist')
+        <input type="hidden" name="tab" value="mylist">
+    @endif
     <input class="search-form__input" type="text" name="keyword"
     placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
 </form>
