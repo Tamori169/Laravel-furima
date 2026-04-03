@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/auth/login.css') }}">
 @endsection
 
@@ -13,7 +12,7 @@
             ログイン
         </h1>
     </div>
-    <form class="form" action="/login" method="POST">
+    <form class="form" action="{{ route('login') }}" method="POST" novalidate>
         @csrf
         <!-- メールアドレス -->
         <div class="form__group">
@@ -24,7 +23,8 @@
             </div>
             <div class="form__group-content">
                 <div class="form__item">
-                    <input class="form__item-input" type="email" name="email">
+                    <input class="form__item-input" type="email" name="email"
+                    value="{{ old('email') }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -44,7 +44,8 @@
             </div>
             <div class="form__group-content">
                 <div class="form__item">
-                    <input class="form__item-input" type="password" name="password">
+                    <input class="form__item-input" type="password" name="password"
+                    value="{{ old('password') }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -62,6 +63,7 @@
             </button>
         </div>
     </form>
+    <!-- 会員登録リンク -->
     <div class="login-form__register">
         <a class="login-form__register-link" href="{{ route('register') }}">
             会員登録はこちら

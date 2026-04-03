@@ -70,7 +70,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::verifyEmailView(function () {
-            return view('auth.verify-email');
+            return view('auth.verify_email');
         });
 
         Fortify::loginView(function () {
