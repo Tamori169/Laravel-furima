@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="{{ asset('css/auth/verify_email.css') }}">
 @endsection
 
+@section('search', '')
+@section('nav', '')
+
 @section('content')
 
 <div class="verify-email">

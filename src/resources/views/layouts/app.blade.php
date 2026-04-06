@@ -14,12 +14,53 @@
 </head>
 <body>
     <header class="header">
-        <img class="header-logo" src="{{ asset('images/logos/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECHヘッダーロゴ">
-        @if (View::hasSection('nav'))
-        <nav class="header-nav">
-        @yield('nav')
+        <div class="header__logo">
+            <img class="header__logo-image" src="{{ asset('images/logos/COACHTECHヘッダーロゴ.png') }}"
+            alt="COACHTECHヘッダーロゴ">
+        </div>
+        <div class="header__search">
+            @section('search')
+            <form class="search-form" method="get" action="{{ route('item.index') }}">
+                @if(request('tab') === 'mylist')
+                <input type="hidden" name="tab" value="mylist">
+                @endif
+                <input class="search-form__input" type="text" name="keyword"
+                placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+            </form>
+            @show
+        </div>
+        <nav class="header__nav">
+            @section('nav')
+            <!-- ログイン/ログアウト -->
+            <div class="header__nav-items">
+                <!-- ログインしている場合 -->
+                @auth
+                <form class="logout__button" method="post" action="{{ route('logout') }}">
+                @csrf
+                    <button class="logout__button-submit" type="submit">ログアウト</button>
+                </form>
+                @endauth
+                <!-- ログインしていない場合 -->
+                @guest
+                <a href="{{ route('login') }}" class="login__link">ログイン</a>
+                @endguest
+            </div>
+            <!-- マイページ -->
+            <div class="header__nav-items">
+                <form class="mypage__button" method="get" action="{{ route('profile.show') }}">
+                @csrf
+                    <button class="mypage__button-submit" type="submit">マイページ</button>
+                </form>
+            </div>
+            <!-- 出品 -->
+            <div class="header__nav-items">
+                <form class="sell__button" method="get" action="{{ route('item.create') }}">
+                @csrf
+                    <button class="sell__button-submit" type="submit">出品</button>
+                </form>
+            </div>
+            @show
         </nav>
-        @endif
     </header>
     <main>
         @yield('content')
