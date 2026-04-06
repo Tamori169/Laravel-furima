@@ -51,42 +51,46 @@ body {
     gap: 15px;
 }
 
-.logout__button-submit {
-    background: none;
+.logout__button-submit,
+.login__link,
+.mypage__button-submit,
+.sell__button-submit {
     border: none;
     font-size: 16px;
+}
+
+.logout__button-submit,
+.login__link,
+.mypage__button-submit {
+    background: none;
     color: #fff;
-    padding: 5px 0 5px 0;
+}
+
+.logout__button-submit,
+.mypage__button-submit,
+.sell__button-submit {
     cursor: pointer;
+}
+
+.logout__button-submit {
+    padding: 5px 0 5px 0;
 }
 
 .login__link {
     display: inline-block;
     text-decoration: none;
-    background: none;
-    border: none;
-    font-size: 16px;
-    color: #fff;
     padding: 5px 0 5px 0;
 }
 
 .mypage__button-submit {
-    background: none;
-    border: none;
-    font-size: 16px;
-    color: #fff;
     padding: 5px 25px;
-    cursor: pointer;
 }
 
 .sell__button-submit {
     background: #fff;
-    border: none;
-    font-size: 16px;
     color: #000;
     border-radius: 3px;
     padding: 5px 25px;
-    cursor: pointer;
 }
 
 input::placeholder {

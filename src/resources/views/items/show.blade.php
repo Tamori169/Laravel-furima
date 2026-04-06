@@ -1,5 +1,142 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/items/index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/items/show.css') }}">
+@endsection
+
+@section('content')
+
+<div class="item-detail">
+    <div class="item-detail__inner">
+        <!-- 商品画像 -->
+        <div class="item-detail__image-wrapper">
+            <img class="item-detail__image" src="{{ asset($item->image) }}"
+            alt="{{ $item->name }}">
+        </div>
+        <div class="item-detail__info-wrapper">
+            <!-- 商品名 -->
+            <div class="item-detail__name">
+                <h1 class="item-detail__name-text">
+                    {{ $item->name }}
+                </h1>
+            </div>
+            <!-- ブランド名 -->
+            <div class="item-detail__brand">
+                <p class="item-detail__brand-text">
+                    {{ $item->brand }}
+                </p>
+            </div>
+            <!-- 商品価格 -->
+            <div class="item-detail__price">
+                <p class="item-detail__price-currency">¥</p>
+                <span class="item-detail__price-amount">
+                    {{ number_format($item->price) }}
+                </span>
+                <p class="item-detail__price-tax">(税込)</p>
+            </div>
+            <!-- いいね！とコメント数 -->
+            <div class="item-detail__actions">
+                <div class="action__favorite">
+                    <img class="action__favorite-icon"
+                    src="{{ asset('images/logos/ハートロゴ_デフォルト.png')}}" alt="いいね！" >
+                    <p class="action__favorites-count">
+                        {{ $item->likes_count }}1
+                    </p>
+                </div>
+                <div class="action__comment">
+                    <img class="action__comment-icon"
+                    src="{{ asset('images/logos/ふきだしロゴ.png')}}" alt="コメント" >
+                    <p class="action__comments-count">
+                        {{ $item->comments_count }}1
+                    </p>
+                </div>
+            </div>
+            <!-- 購入手続き -->
+            <form class="purchase__button" action="{{ route('order.create', $item->id) }}" method="get">
+                <button class="purchase__button-submit" type="submit">
+                    購入手続きへ
+                </button>
+            </form>
+            <!-- 商品説明 -->
+            <div class="item-detail__description">
+                <div class="item-detail__description-title">
+                    <h2 class="item-detail__description-heading">
+                        商品説明
+                    </h2>
+                </div>
+                <div class="item-detail__description-content">
+                    <p class="item-detail__description-text">
+                        {{ $item->description }}
+                    </p>
+                </div>
+            </div>
+            <!-- 商品の情報 -->
+            <div class="item-detail__specs">
+                <div class="item-detail__specs-title">
+                    <h2 class="item-detail__specs-heading">
+                        商品の情報
+                    </h2>
+                </div>
+                <div class="item-detail__categories">
+                    <p class="item-detail__categories-label">
+                        カテゴリー
+                    </p>
+                    @foreach($item->categories as $category)
+                    <p class="item-detail__categories-content">
+                        {{ $category->name }}
+                    </p>
+                    @endforeach
+                </div>
+                <div class="item-detail__condition">
+                    <p class="item-detail__condition-label">
+                        商品の状態
+                    </p>
+                    <p class="item-detail__condition-content">
+                        {{ $item->condition->name }}
+                    </p>
+                </div>
+            </div>
+            <!-- コメント -->
+            <div class="item-detail__comments">
+                <div class="item-detail__comments-title">
+                    <h2 class="item-detail__comments-heading">
+                        コメント({{ $item->comments_count ?? 0 }})
+                    </h2>
+                </div>
+                <!-- コメント一覧 -->
+                <div class="item-detail__comments-list">
+                    @foreach($item->comments as $comment)
+                    <div class="comment__group">
+                        <div class="comment__item-wrapper">
+                            <img class="comment__user-image" src="" alt="ユーザーアイコン">
+                            <p class="comment__user-name">
+                                {{ $comment->user->name }}
+                            </p>
+                        </div>
+                        <div class="comment__content">
+                            <p class="comment__text">
+                                {{ $comment->comment }}
+                            </p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- コメント投稿フォーム -->
+                <form class="comment__form" action="{{ route('comment.store', $item->id) }}" method="post">
+                    @csrf
+                    <div class="comment__form-group">
+                        <span class="comment__form-label">商品へのコメント</span>
+                        <textarea class="comment__form-textarea" name="comment" ></textarea>
+                    </div>
+                    <div class="comment__form-button">
+                        <button class="comment__form-submit" type="submit">
+                            コメントを送信する
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection

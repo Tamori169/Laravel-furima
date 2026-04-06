@@ -52,7 +52,7 @@ class ItemController extends Controller
 
     public function show($item_id)
     {
-        $item = Item::with(['comments', 'favorites', 'categories'])->findOrFail($item_id);
+        $item = Item::with(['comments', 'favorites', 'categories', 'condition'])->findOrFail($item_id);
         return view('items.show', compact('item'));
     }
 }

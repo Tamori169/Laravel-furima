@@ -1,0 +1,123 @@
+.item-detail {
+    margin-top: 50px;
+}
+
+.item-detail__inner {
+    margin: 0 auto;
+    display: flex;
+    padding-left: 3%;
+    padding-right: 3%;
+    gap: 100px;
+    max-width: 1200px;
+}
+
+.item-detail__image-wrapper {
+    margin-top: 50px;
+    width: 50%;
+}
+
+.item-detail__image {
+    width: 100%;
+    height: auto;
+}
+
+.item-detail__info {
+    width: 50%;
+}
+
+.item-detail__brand {
+    margin-top: -20px;
+}
+
+.item-detail__price {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.item-detail__price-amount {
+    font-size: 30px;
+    padding-bottom: 5px;
+}
+
+.item-detail__price-currency,
+.item-detail__price-tax {
+    font-size: 20px;
+}
+
+.item-detail__actions {
+    margin: 10px 0 0 30px;
+    display: flex;
+    gap: 40px;
+}
+
+.action__favorite-icon,
+.action__comment-icon {
+    height: auto;
+    align-items: center;
+}
+
+.action__favorite-icon {
+    width: 35px;
+}
+
+.action__comment-icon {
+    width: 31px;
+}
+
+.action__favorites-count,
+.action__comments-count {
+    text-align: center;
+}
+
+.purchase__button-submit,
+.comment__form-submit {
+    width: 150%;
+    background-color: #FF0000;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.form__button-submit:hover,
+.comment__form-submit:hover {
+    background-color: #cc0000;
+}
+
+.item-detail__categories,
+.item-detail__condition {
+    display: flex;
+    gap: 30px;
+}
+
+.item-detail__categories-label,
+.item-detail__condition-label {
+    font-weight: bold;
+}
+
+.item-detail__categories-content {
+    background-color: #ccc;
+    gap: 30px;
+    border: none;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.comment__form-label {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.comment__form-textarea {
+    margin-top: 10px;
+    width: 150%;
+    height: 200px;
+}
+
+.comment__form-button {
+    margin-top: 20px;
+}
