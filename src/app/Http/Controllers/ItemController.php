@@ -29,8 +29,8 @@ class ItemController extends Controller
         if ($tab === 'mylist') {
             // --- マイリストタブの場合 ---
             if ($myId) {
-                // ログイン中：自分がお気に入り（likes）した商品だけに絞り込む
-                $query->whereHas('likes', function ($q) use ($myId) {
+                // ログイン中：自分がお気に入り（favorites）した商品だけに絞り込む
+                $query->whereHas('favorites', function ($q) use ($myId) {
                     $q->where('user_id', $myId);
                 });
             } else {
@@ -52,7 +52,10 @@ class ItemController extends Controller
 
     public function show($item_id)
     {
-        $item = Item::with(['comments', 'favorites', 'categories', 'condition'])->findOrFail($item_id);
+        $item = Item::with(['comments.user.profile', 'favorites', 'categories', 'condition'])
+                ->withCount('comments','favorites')
+                ->findOrFail($item_id);
+
         return view('items.show', compact('item'));
     }
 }

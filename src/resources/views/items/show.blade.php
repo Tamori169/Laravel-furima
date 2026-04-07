@@ -37,17 +37,31 @@
             <!-- いいね！とコメント数 -->
             <div class="item-detail__actions">
                 <div class="action__favorite">
-                    <img class="action__favorite-icon"
-                    src="{{ asset('images/logos/ハートロゴ_デフォルト.png')}}" alt="いいね！" >
+                    @if(Auth::check() && $item->favorites->contains(Auth::id()))
+                        <form action="{{ route('favorite.destroy', $item->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" style="background: none; border: none;">
+                                <img class="action__favorite-icon" src="{{ asset('images/logos/ハートロゴ_ピンク.png') }}" alt="いいね解除">
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('favorite.store', $item->id) }}" method="post">
+                            @csrf
+                            <button type="submit" style="background: none; border: none;">
+                                <img class="action__favorite-icon" src="{{ asset('images/logos/ハートロゴ_デフォルト.png') }}" alt="いいね追加">
+                            </button>
+                        </form>
+                    @endif
                     <p class="action__favorites-count">
-                        {{ $item->likes_count }}1
+                        {{ $item->favorites_count ?? 0 }}
                     </p>
                 </div>
                 <div class="action__comment">
                     <img class="action__comment-icon"
                     src="{{ asset('images/logos/ふきだしロゴ.png')}}" alt="コメント" >
                     <p class="action__comments-count">
-                        {{ $item->comments_count }}1
+                        {{ $item->comments_count ?? 0 }}
                     </p>
                 </div>
             </div>
@@ -77,6 +91,7 @@
                         商品の情報
                     </h2>
                 </div>
+                <!-- カテゴリー -->
                 <div class="item-detail__categories">
                     <p class="item-detail__categories-label">
                         カテゴリー
@@ -87,6 +102,7 @@
                     </p>
                     @endforeach
                 </div>
+                <!-- コンディション -->
                 <div class="item-detail__condition">
                     <p class="item-detail__condition-label">
                         商品の状態
@@ -108,7 +124,7 @@
                     @foreach($item->comments as $comment)
                     <div class="comment__group">
                         <div class="comment__item-wrapper">
-                            <img class="comment__user-image" src="" alt="ユーザーアイコン">
+                            <img class="comment__user-image" src="{{ asset($comment->user->profile->image) }}" alt="アイコン">
                             <p class="comment__user-name">
                                 {{ $comment->user->name }}
                             </p>
@@ -126,7 +142,14 @@
                     @csrf
                     <div class="comment__form-group">
                         <span class="comment__form-label">商品へのコメント</span>
-                        <textarea class="comment__form-textarea" name="comment" ></textarea>
+                        <textarea class="comment__form-textarea" name="comment">{{ old('comment') }}</textarea>
+                    </div>
+                    <div class="form__error">
+                        <span class="form__error-text">
+                            @error('comment')
+                            {{ $message }}
+                            @enderror
+                        </span>
                     </div>
                     <div class="comment__form-button">
                         <button class="comment__form-submit" type="submit">

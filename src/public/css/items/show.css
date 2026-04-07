@@ -83,9 +83,13 @@
     cursor: pointer;
 }
 
-.form__button-submit:hover,
+.purchase__button-submit:hover,
 .comment__form-submit:hover {
     background-color: #cc0000;
+}
+
+.item-detail__categories {
+    margin-top: -20px;
 }
 
 .item-detail__categories,
@@ -100,11 +104,36 @@
 }
 
 .item-detail__categories-content {
-    background-color: #ccc;
+    background-color: #eee;
     gap: 30px;
     border: none;
     border-radius: 20px;
     padding: 0 10px;
+}
+
+.comment__item-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.comment__user-image {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment__user-name {
+    font-weight: bold;
+}
+
+.comment__text {
+    width: 150%;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 .comment__form-label {
@@ -116,6 +145,21 @@
     margin-top: 10px;
     width: 150%;
     height: 200px;
+    outline: none;
+    font-size: 16px;
+    padding: 10px;
+    font: inherit;
+}
+
+.form__error {
+    line-height: 1.5;
+    min-height: 1.5em;
+}
+
+.form__error-text {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .comment__form-button {

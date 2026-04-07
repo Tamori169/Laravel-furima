@@ -14,7 +14,7 @@ class Order extends Model
         'address',
         'building',
         'payment_method'
-        ];
+    ];
 
     public function user()
     {
