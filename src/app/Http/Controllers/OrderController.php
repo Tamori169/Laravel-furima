@@ -11,9 +11,10 @@ class OrderController extends Controller
 {
     public function create($item_id)
     {
-        $profile = Auth::user()->load('profile');
+        $user = Auth::user();
+        $profile = $user->profile;
         $item = Item::findOrFail($item_id);
 
-        return view('orders.create', compact('item', 'item_id'));
+        return view('orders.create', compact('item', 'profile','item_id'));
     }
 }

@@ -36,6 +36,10 @@ Route::middleware(['auth'])->group(function () {
         ->name('favorite.destroy');
     Route::get('/purchase/{item_id}',[OrderController::class,'create'])
         ->name('order.create');
+    Route::post('/purchase/{item_id}',[OrderController::class,'store'])
+        ->name('order.store');
+    Route::get('/purchase/address/{item_id}',[OrderController::class,'edit'])
+        ->name('order.edit');
     Route::get('/sell',[ItemController::class,'create'])
         ->name('item.create');
     Route::get('/mypage',[ProfileController::class,'show'])
