@@ -41,7 +41,7 @@
                 </div>
                 <div class="form__payment-method--content">
                     <select class="form__payment-method--select" name="payment_method" id="payment-select">
-                        <option class="form__payment-method--option">選択してください</option>
+                        <option class="form__payment-method--option" value="" selected disabled>選択してください</option>
                         <option class="form__payment-method--option" value="コンビニ払い">コンビニ払い</option>
                         <option class="form__payment-method--option" value="カード支払い">カード支払い</option>
                     </select>
@@ -63,13 +63,23 @@
                         </h2>
                     </div>
                     <div class="form__shipping-address--content">
+                        <span class="form__shipping-address--character">〒</span>
                         <input class="form__shipping-address--postal-code" type="text" name="postal_code"
-                        value="〒{{ substr($profile->postal_code, 0, 3) }}-{{ substr($profile->postal_code, 3) }}" readonly>
-                        </input></br>
+                        value="{{ substr($profile->postal_code, 0, 3) }}-{{ substr($profile->postal_code, 3) }}" readonly>
+                        </input>
+                    </div>
+                    <div class="form__shipping-address--content">
                         <input class="form__shipping-address--address" type="text" name="address"
                         value="{{ $profile->address }}" readonly>
-                        <input class="form__shipping-address--building" type="text" name="address"
+                        <input class="form__shipping-address--building" type="text" name="building"
                         value="{{ $profile->building }}" readonly>
+                    </div>
+                    <div class="form__error">
+                        <span class="form__error-text">
+                            @error('postal_code')
+                            {{ $message }}
+                            @enderror
+                        </span>
                     </div>
                     <div class="form__error">
                         <span class="form__error-text">
@@ -109,6 +119,7 @@
             </table>
             <!-- 購入ボタン -->
             <div class="purchase__button">
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <button class="purchase__button-submit" type="submit">
                     購入する
                 </button>

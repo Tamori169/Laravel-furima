@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProfilesSeeder extends Seeder
+class ProfilesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

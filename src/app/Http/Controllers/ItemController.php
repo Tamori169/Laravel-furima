@@ -56,6 +56,6 @@ class ItemController extends Controller
                 ->withCount('comments','favorites')
                 ->findOrFail($item_id);
 
-        return view('items.show', compact('item'));
+        return view('items.show',compact('item'));
     }
 }

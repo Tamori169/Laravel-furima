@@ -9,7 +9,7 @@
 
 .form__group {
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .form__group-title,
@@ -45,12 +45,12 @@
 
 .form__error-text {
     color: red;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .form__button {
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .form__button-submit {
