@@ -18,15 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/setup-profile', function () {
-    return view('profiles.form');
-})->middleware(['auth', 'verified']);
+// メール認証後にプロフィール設定画面を呼び出す //
+Route::get('/setup-profile',[ProfileController::class,'create']
+    )->middleware(['auth','verified'])
+    ->name('profile.create');
 
+// 未認証ユーザが可能な処理 //
 Route::get('/',[ItemController::class,'index'])
     ->name('item.index');
 Route::get('/item/{item_id}',[ItemController::class,'show'])
     ->name('item.show');
 
+// 認証ユーザのみ可能な処理 //
 Route::middleware(['auth'])->group(function () {
     Route::post('/item/{item_id}/comment',[CommentController::class,'store'])
         ->name('comment.store');
@@ -42,6 +45,12 @@ Route::middleware(['auth'])->group(function () {
         ->name('order.edit');
     Route::get('/sell',[ItemController::class,'create'])
         ->name('item.create');
+    Route::post('/setup-profile',[ProfileController::class,'store'])
+        ->name('profile.store');
     Route::get('/mypage',[ProfileController::class,'show'])
         ->name('profile.show');
+    Route::get('/mypage/profile',[ProfileController::class,'edit'])
+        ->name('profile.edit');
+    Route::post('/mypage/profile',[ProfileController::class,'update'])
+        ->name('profile.update');
 });

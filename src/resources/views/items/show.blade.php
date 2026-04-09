@@ -66,11 +66,17 @@
                 </div>
             </div>
             <!-- 購入手続き -->
-            <form class="purchase__button" action="{{ route('order.create', $item->id) }}" method="get">
-                <button class="purchase__button-submit" type="submit">
-                    購入手続きへ
+            <div class="purchase__button">
+                @if($isSold)
+                <button class="sold__button" disabled>
+                    売り切れ
                 </button>
-            </form>
+                @else
+                <a class="purchase__link" href="{{ route('order.create', $item->id) }}">
+                    購入手続きへ
+                </a>
+                @endif
+            </div>
             <!-- 商品説明 -->
             <div class="item-detail__description">
                 <div class="item-detail__description-title">

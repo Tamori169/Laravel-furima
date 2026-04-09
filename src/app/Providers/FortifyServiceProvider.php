@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Contracts\VerifyEmailResponse;
+use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -28,7 +29,7 @@ class FortifyServiceProvider extends ServiceProvider
             \Laravel\Fortify\Http\Responses\RegisterResponse::class,
             new class implements \Laravel\Fortify\Contracts\RegisterResponse {
                 public function toResponse($request) {
-                    return redirect('/email/verify'); 
+                    return redirect('/email/verify');
                 }
             }
         );
@@ -70,7 +71,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::verifyEmailView(function () {
-            return view('auth.verify_email');
+            return view('auth.verify-email');
         });
 
         Fortify::loginView(function () {
@@ -81,6 +82,18 @@ class FortifyServiceProvider extends ServiceProvider
             $email = (string) $request->email;
 
             return Limit::perMinute(10)->by($email . $request->ip());
+        });
+
+        // ログインレスポンスのカスタマイズ
+        $this->app->instance(LoginResponseContract::class, new class implements LoginResponseContract {
+            public function toResponse($request) {
+                // 未認証なら認証画面へ
+                if ($request->user() && !$request->user()->hasVerifiedEmail()) {
+                    return redirect()->route('verification.notice');
+                }
+                // 認証済みならトップへ
+                return redirect('/');
+            }
         });
     }
 }

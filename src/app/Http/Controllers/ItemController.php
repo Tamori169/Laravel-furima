@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,6 +57,8 @@ class ItemController extends Controller
                 ->withCount('comments','favorites')
                 ->findOrFail($item_id);
 
-        return view('items.show',compact('item'));
+        $isSold = Order::where('item_id', $item_id)->exists();
+
+        return view('items.show',compact('item','isSold'));
     }
 }

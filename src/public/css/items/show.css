@@ -1,5 +1,6 @@
 .item-detail {
     margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 .item-detail__inner {
@@ -70,22 +71,37 @@
     text-align: center;
 }
 
-.purchase__button-submit,
-.comment__form-submit {
+.purchase__link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.purchase__link,
+.comment__form-submit,
+.sold__button {
     width: 150%;
-    background-color: #FF0000;
     color: #fff;
     border-radius: 3px;
     padding: 10px 25px;
     font-size: 20px;
     font-weight: bold;
     border: none;
+}
+
+.purchase__link,
+.comment__form-submit {
+    background-color: #FF0000;
     cursor: pointer;
 }
 
-.purchase__button-submit:hover,
+.purchase__link:hover,
 .comment__form-submit:hover {
     background-color: #cc0000;
+}
+
+.sold__button {
+    background-color: #444;
 }
 
 .item-detail__categories {
