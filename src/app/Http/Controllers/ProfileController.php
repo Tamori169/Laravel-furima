@@ -19,7 +19,7 @@ class ProfileController extends Controller
     {
         $user_id = Auth::id();
 
-        $imagePath = null; // 初期値は”空” //
+        $imagePath = null;
 
         if ($request->hasFile('image')) {
         $file = $request->file('image');
