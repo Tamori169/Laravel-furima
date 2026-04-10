@@ -18,7 +18,7 @@
             プロフィール設定
         </h1>
     </div>
-    <form class="form" action="{{ $route }}" method="POST" novalidate>
+    <form class="form" action="{{ $route }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
         @if($isUpdate)
             @method('PUT')
@@ -27,12 +27,12 @@
         <div class="form__image">
             <div class="form__image-content">
                 <div class="form__image-preview">
-                    <img class="form__image-item"
+                    <img class="form__image-item" id="preview"
                     src="{{ asset('images/profiles/Gray__profile-image.jpg') }}" alt="No Image">
                 </div>
                 <div class="form__image-upload">
                     <label class="form__image-file" for="image-upload">
-                        画像を選択
+                        画像を選択する
                     </label>
                     <input id="image-upload" type="file" name="image"
                     onchange="previewImage(this)">

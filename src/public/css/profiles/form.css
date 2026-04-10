@@ -5,31 +5,47 @@
 }
 
 .form {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 #image-upload {
     display: none;
 }
 
-.form__image{
-    text-align: center;
+.form__image {
+    margin: 0 auto;
+    width: 35%;
 }
 
 .form__image-content {
     display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
 }
 
 .form__image-item {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border: none;
     border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .form__image-file {
-    margin: auto;
-    background-color: aqua;
+    padding: 5px 20px;
+    color: #FF0000;
+    font-weight: bolder;
+    border: 2px solid #FF0000;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.form__image-file:hover {
+    color: #cc0000;
+    border: 2px solid #cc0000;
 }
 
 .form__group {

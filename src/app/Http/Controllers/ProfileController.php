@@ -18,15 +18,23 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $user_id = Auth::id();
+
+        $imagePath = null; // 初期値は”空” //
+
+        if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $fileName = $file->getClientOriginalName();
+        $file->storeAs('images/profiles', $fileName, 'public');
+        $imagePath = '/storage/images/profiles/' . $fileName;
+    }
+
         Profile::create([
             'user_id'        => $user_id,
-            'image'          => $request->image,
+            'name'           => $request->name,
+            'image'          => $imagePath,
             'postal_code'    => $request->postal_code,
             'address'        => $request->address,
             'building'       => $request->building,
-        ]);
-        User::update([
-            'name'           => $request->name,
         ]);
 
         return redirect()->route('item.index');
