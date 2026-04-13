@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommentRequest extends FormRequest
+class AddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,17 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => ['required', 'max:255'],
+            'postal_code' => ['required', 'regex:/^\d{3}-\d{4}$/'],
+            'address' => ['required'],
         ];
     }
 
     public function messages()
     {
         return [
-            'comment.required' => 'コメントを入力してください',
-            'comment.max' => 'コメントは255文字以内で入力してください',
+            'postal_code.required' => '郵便番号を入力してください',
+            'postal_code.regex' => '郵便番号は間にハイフンを入れて８文字で入力してください',
+            'address.required' => '住所を入力してください',
         ];
     }
 }

@@ -43,14 +43,18 @@ Route::middleware(['auth'])->group(function () {
         ->name('order.store');
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit'])
         ->name('order.edit');
+    Route::patch('/purchase/address/{item_id}',[OrderController::class,'update'])
+        ->name('order.update');
     Route::get('/sell',[ItemController::class,'create'])
         ->name('item.create');
+    Route::post('/sell',[ItemController::class,'store'])
+        ->name('item.store');
     Route::post('/setup-profile',[ProfileController::class,'store'])
         ->name('profile.store');
     Route::get('/mypage',[ProfileController::class,'show'])
         ->name('profile.show');
     Route::get('/mypage/profile',[ProfileController::class,'edit'])
         ->name('profile.edit');
-    Route::post('/mypage/profile',[ProfileController::class,'update'])
+    Route::patch('/mypage/profile',[ProfileController::class,'update'])
         ->name('profile.update');
 });

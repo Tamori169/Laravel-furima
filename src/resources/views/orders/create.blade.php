@@ -65,14 +65,14 @@
                     <div class="form__shipping-address--content">
                         <span class="form__shipping-address--character">〒</span>
                         <input class="form__shipping-address--postal-code" type="text" name="postal_code"
-                        value="{{ $profile ? substr($profile->postal_code, 0, 3) . '-' . substr($profile->postal_code, 3) : '' }}" readonly>
+                        value="{{ $address->postal_code ?? ''}}" readonly>
                         </input>
                     </div>
                     <div class="form__shipping-address--content">
                         <input class="form__shipping-address--address" type="text" name="address"
-                        value="{{ $profile->address ?? ''}}" readonly>
+                        value="{{ $address->address ?? ''}}" readonly>
                         <input class="form__shipping-address--building" type="text" name="building"
-                        value="{{ $profile->building ?? ''}}" readonly>
+                        value="{{ $address->building ?? ''}}" readonly>
                     </div>
                     <div class="form__error">
                         <span class="form__error-text">

@@ -21,14 +21,14 @@
     <form class="form" action="{{ $route }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
         @if($isUpdate)
-            @method('PUT')
+            @method('PATCH')
         @endif
         <!-- 画像アップロード -->
         <div class="form__image">
             <div class="form__image-content">
                 <div class="form__image-preview">
-                    <img class="form__image-item" id="preview"
-                    src="{{ asset('images/profiles/Gray__profile-image.jpg') }}" alt="No Image">
+                    <img class="form__image--item" id="preview"
+                    src="{{ $profile->image ? asset('storage' . $profile->image) : asset('images/profiles/Gray__profile-image.jpg') }}">
                 </div>
                 <div class="form__image-upload">
                     <label class="form__image-file" for="image-upload">
@@ -40,7 +40,7 @@
             </div>
             <div class="form__error">
                 <span class="form__error-text">
-                    @error('building')
+                    @error('image')
                     {{ $message }}
                     @enderror
                 </span>
@@ -56,7 +56,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="name"
-                    value="{{ old('name') }}" placeholder="{{ $user->name }}">
+                    value="{{ old('name', $user->name) }}" placeholder="{{ $user->name }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -77,7 +77,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="postal_code"
-                    value="{{ old('postal_code') }}">
+                    value="{{ old('postal_code', $profile->postal_code) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -98,7 +98,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="address"
-                    value="{{ old('address') }}">
+                    value="{{ old('address', $profile->address) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -119,7 +119,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="building"
-                    value="{{ old('building') }}">
+                    value="{{ old('building', $profile->building) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -133,7 +133,7 @@
         <!-- 登録ボタン -->
         <div class="form__button">
             <button class="form__button-submit" type="submit">
-                {{ $isUpdate ? '更新する' : '登録する' }}
+                更新する
             </button>
         </div>
     </form>
