@@ -46,6 +46,11 @@
     display: none;
 }
 
+.form__image-item {
+    width: 150px;
+    height: auto;
+}
+
 .form__image-upload {
     margin-top: 40px;
     text-align: center;

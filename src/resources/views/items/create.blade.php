@@ -22,9 +22,6 @@
                 </p>
             </div>
             <div class="form__image-content">
-                <div class="form__image-preview">
-                    <img class="form__image-item" id="preview" src="" alt="">
-                </div>
                 <div class="form__image-upload">
                     <label class="form__image-file" for="image-upload">
                         画像を選択する
@@ -56,8 +53,8 @@
             <div class="form__categories-content">
                 @foreach ($categories as $category)
                     <label class="form__category-label">
-                        <input class="form__content-checkbox" type="checkbox"
-                        name="categories[]" value="{{ $category->id }}">
+                        <input class="form__content-checkbox" type="checkbox" name="categories[]"
+                        value="{{ $category->id }}" {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
                         <span class="form__content-items">
                             {{ $category->name }}
                         </span>
@@ -66,7 +63,7 @@
             </div>
             <div class="form__error">
                 <span class="form__error-text">
-                    @error('category')
+                    @error('categories')
                     {{ $message }}
                     @enderror
                 </span>
@@ -85,15 +82,16 @@
                         選択してください
                     </option>
                     @foreach ($conditions as $condition)
-                    <option class="form__content-option" value="{{ $condition->id }}">
-                        {{ $condition->name }}
-                    </option>
+                        <option value="{{ $condition->id }}"
+                        {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
+                            {{ $condition->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
             <div class="form__error">
                 <span class="form__error-text">
-                    @error('condition')
+                    @error('condition_id')
                     {{ $message }}
                     @enderror
                 </span>
@@ -150,8 +148,7 @@
                 </p>
             </div>
             <div class="form__content">
-                <textarea class="form__content-textarea" type="text" name="description">{{ old('description') }}
-                </textarea>
+                <textarea class="form__content-textarea" type="text" name="description">{{ old('description') }}</textarea>
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -191,19 +188,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-<script>
-    function previewImage(obj) {
-        const fileReader = new FileReader();
-
-        fileReader.onload = function() {
-            document.getElementById('preview').src = fileReader.result;
-        };
-
-        if (obj.files && obj.files[0]) {
-            fileReader.readAsDataURL(obj.files[0]);
-        }
-    }
-</script>
-@endpush

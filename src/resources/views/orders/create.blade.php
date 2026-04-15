@@ -119,7 +119,6 @@
             </table>
             <!-- 購入ボタン -->
             <div class="purchase__button">
-                <input type="hidden" name="item_id" value="{{ $item->id }}">
                 <button class="purchase__button-submit" type="submit">
                     購入する
                 </button>

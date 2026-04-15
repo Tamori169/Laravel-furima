@@ -75,8 +75,6 @@ class ItemController extends Controller
 
     public function store(SellRequest $request)
     {
-        $user_id = Auth::id();
-
         $imagePath = null;
 
         $file = $request->file('image');
@@ -85,11 +83,11 @@ class ItemController extends Controller
         $imagePath = '/storage/images/items/' . $fileName;
 
         $item = Item::create([
-            'user_id'        => $user_id,
+            'user_id'        => auth()->id(),
             'name'           => $request->name,
             'description'    => $request->description,
             'image'          => $imagePath,
-            'condition'      => $request->condition_id,
+            'condition_id'   => $request->condition_id,
             'brand'          => $request->brand,
             'price'          => $request->price,
         ]);
