@@ -134,9 +134,7 @@
         const select = document.getElementById('payment-select');
         const display = document.getElementById('display-payment');
 
-        // セレクトボックスの値が変わった時のイベント
         select.addEventListener('change', function() {
-            // 選択された option のテキストを右側の td に代入
             display.textContent = select.value;
         });
     });
