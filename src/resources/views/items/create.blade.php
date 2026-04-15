@@ -13,6 +13,7 @@
         </h1>
     </div>
     <form class="form" action="{{ route('item.create') }}" method="POST" enctype="multipart/form-data" novalidate>
+        @csrf
         <!-- 商品画像 -->
         <div class="form__group">
             <div class="form__title">
@@ -22,11 +23,14 @@
             </div>
             <div class="form__image-content">
                 <div class="form__image-preview">
-                    <img class="form__image-item" src="" alt="">
+                    <img class="form__image-item" id="preview" src="" alt="">
                 </div>
                 <div class="form__image-upload">
-                    <label class="form__image-file" for="image-upload">画像を選択する</label>
-                    <input id="image-upload" type="file">
+                    <label class="form__image-file" for="image-upload">
+                        画像を選択する
+                    </label>
+                    <input id="image-upload" type="file" name="image"
+                    onchange="previewImage(this)">
                 </div>
             </div>
             <div class="form__error">
@@ -49,10 +53,16 @@
                     カテゴリー
                 </p>
             </div>
-            <div class="form__content">
-                <p class="form__content-items">
-                    あああ
-                </p>
+            <div class="form__categories-content">
+                @foreach ($categories as $category)
+                    <label class="form__category-label">
+                        <input class="form__content-checkbox" type="checkbox"
+                        name="categories[]" value="{{ $category->id }}">
+                        <span class="form__content-items">
+                            {{ $category->name }}
+                        </span>
+                    </label>
+                @endforeach
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -71,7 +81,14 @@
             </div>
             <div class="form__content">
                 <select class="form__content-select" name="condition_id">
-                    <option class="form__content--option" value="" selected disabled>選択してください</option>
+                    <option class="form__content-option" value="" selected disabled>
+                        選択してください
+                    </option>
+                    @foreach ($conditions as $condition)
+                    <option class="form__content-option" value="{{ $condition->id }}">
+                        {{ $condition->name }}
+                    </option>
+                    @endforeach
                 </select>
             </div>
             <div class="form__error">
@@ -95,7 +112,8 @@
                 </p>
             </div>
             <div class="form__content">
-                <input class="form__content-input" type="text" name="name">
+                <input class="form__content-input" type="text" name="name"
+                value="{{ old('name') }}">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -113,7 +131,8 @@
                 </p>
             </div>
             <div class="form__content">
-                <input class="form__content-input" type="text" name="brand">
+                <input class="form__content-input" type="text" name="brand"
+                value="{{ old('brand') }}">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -131,7 +150,8 @@
                 </p>
             </div>
             <div class="form__content">
-                <textarea class="form__content-textarea" type="text" name="description"></textarea>
+                <textarea class="form__content-textarea" type="text" name="description">{{ old('description') }}
+                </textarea>
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -148,8 +168,10 @@
                     販売価格
                 </p>
             </div>
-            <div class="form__content">
-                <input class="form__content-input" type="text" name="price">
+            <div class="form__price">
+                <span class="yen-mark">¥</span>
+                <input class="form__price-input" type="text" name="price"
+                value="{{ old('price') }}">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -169,3 +191,19 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    function previewImage(obj) {
+        const fileReader = new FileReader();
+
+        fileReader.onload = function() {
+            document.getElementById('preview').src = fileReader.result;
+        };
+
+        if (obj.files && obj.files[0]) {
+            fileReader.readAsDataURL(obj.files[0]);
+        }
+    }
+</script>
+@endpush

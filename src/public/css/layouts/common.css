@@ -53,40 +53,33 @@ body {
 
 .logout__button-submit,
 .login__link,
-.mypage__button-submit,
-.sell__button-submit {
+.mypage__link,
+.sell__link {
     border: none;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .logout__button-submit,
 .login__link,
-.mypage__button-submit {
+.mypage__link {
     background: none;
     color: #fff;
 }
 
-.logout__button-submit,
-.mypage__button-submit,
-.sell__button-submit {
-    cursor: pointer;
-}
-
 .logout__button-submit {
-    padding: 5px 0 5px 0;
+    padding: 6px 0 5px 0;
 }
 
-.login__link {
+.login__link,
+.mypage__link,
+.sell__link {
     display: inline-block;
     text-decoration: none;
     padding: 5px 0 5px 0;
 }
 
-.mypage__button-submit {
-    padding: 5px 25px;
-}
-
-.sell__button-submit {
+.sell__link {
     background: #fff;
     color: #000;
     border-radius: 3px;

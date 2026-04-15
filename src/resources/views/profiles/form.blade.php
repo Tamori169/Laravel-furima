@@ -28,7 +28,8 @@
             <div class="form__image-content">
                 <div class="form__image-preview">
                     <img class="form__image--item" id="preview"
-                    src="{{ $profile->image ? asset('storage' . $profile->image) : asset('images/profiles/Gray__profile-image.jpg') }}">
+                    src="{{ $profile && $profile->image
+                    ? asset($profile->image) : asset('images/profiles/Gray__profile-image.jpg') }}">
                 </div>
                 <div class="form__image-upload">
                     <label class="form__image-file" for="image-upload">

@@ -47,17 +47,11 @@
             </div>
             <!-- マイページ -->
             <div class="header__nav-items">
-                <form class="mypage__button" method="get" action="{{ route('profile.show') }}">
-                @csrf
-                    <button class="mypage__button-submit" type="submit">マイページ</button>
-                </form>
+                <a href="{{ route('profile.show') }}" class="mypage__link">マイページ</a>
             </div>
             <!-- 出品 -->
             <div class="header__nav-items">
-                <form class="sell__button" method="get" action="{{ route('item.create') }}">
-                @csrf
-                    <button class="sell__button-submit" type="submit">出品</button>
-                </form>
+                <a href="{{ route('item.create') }}" class="sell__link">出品</a>
             </div>
             @show
         </nav>

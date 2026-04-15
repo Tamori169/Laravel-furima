@@ -1,37 +1,66 @@
-.flash-message {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    background: #ff0000;
-    color: #fff;
-    padding: 10px 20px;
-    width: 100%;
-
-    opacity: 1;
-    transition: opacity 0.5s ease;
-
-    z-index: 1000;
+.mypage__content {
+    margin-top: 70px;
+    margin-bottom: 100px;
+    text-align: center;
 }
 
-.flash-message.fade-out {
-    opacity: 0;
+.profile__content {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.profile__content-wrapper {
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.profile__image-item {
+    width: 120px;
+    height: 120px;
+    border: none;
+    border-radius: 50%;
+}
+
+.edit-profile {
+    display: flex;
+    align-items: center;
+}
+
+.edit-profile__link {
+    width: 250px;
+    padding: 5px 20px;
+    color: #FF0000;
+    font-weight: bolder;
+    border: 2px solid #FF0000;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit-profile__link:hover {
+    color: #cc0000;
+    border: 2px solid #cc0000;
 }
 
 .tabs {
+    margin-top: 30px;
     display: flex;
     height: 80px;
+    gap: 10px;
     border-bottom: 1px solid #2D3748;
 }
 
 .tab__item {
     position: relative;
-    width: 8%;
+    width: 15%;
 }
 
 .tab__item:first-child {
-    margin-left: 300px;
+    margin-left: 100px;
 }
 
 .tab__item-link {
@@ -81,6 +110,7 @@
     color: #000000;
     cursor: pointer;
 }
+
 /* 「sold」表示の装飾（親要素） */
 .item-card__image-wrapper {
     position: relative;
@@ -125,4 +155,3 @@
     filter: brightness(0.8);
     /* 少し暗くする */
 }
-

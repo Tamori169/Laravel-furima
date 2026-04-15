@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SellRequest;
+use App\Models\Category;
+use App\Models\Condition;
 use App\Models\Item;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -64,6 +67,35 @@ class ItemController extends Controller
 
     public function create()
     {
-        return view('items.create');
+        $categories = Category::all();
+        $conditions = Condition::all();
+
+        return view('items.create',compact('categories','conditions'));
+    }
+
+    public function store(SellRequest $request)
+    {
+        $user_id = Auth::id();
+
+        $imagePath = null;
+
+        $file = $request->file('image');
+        $fileName = uniqid() . '_' . $file->getClientOriginalName();
+        $file->storeAs('images/items', $fileName, 'public');
+        $imagePath = '/storage/images/items/' . $fileName;
+
+        $item = Item::create([
+            'user_id'        => $user_id,
+            'name'           => $request->name,
+            'description'    => $request->description,
+            'image'          => $imagePath,
+            'condition'      => $request->condition_id,
+            'brand'          => $request->brand,
+            'price'          => $request->price,
+        ]);
+
+        $item->categories()->attach($request->categories);
+
+        return redirect()->route('item.index');
     }
 }

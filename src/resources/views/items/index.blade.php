@@ -7,15 +7,23 @@
 @section('content')
 
 <div class="items__content">
+    <!-- 購入完了後のメッセージ -->
+    @if (session('message'))
+        <div id="flash-message" class="flash-message">
+            {{ session('message') }}
+        </div>
+    @endif
     <!-- タブ -->
     <div class="tabs">
         <div class="tab__item">
-            <a class="tab__item-link {{ request('tab') != 'mylist' ? 'is-active' : '' }}" href="{{ route('item.index') }}">
+            <a class="tab__item-link {{ request('tab') != 'mylist' ? 'is-active' : '' }}"
+            href="{{ route('item.index', ['keyword' => request('keyword')]) }}">
                 おすすめ
             </a>
         </div>
         <div class="tab__item">
-            <a class="tab__item-link {{ request('tab') == 'mylist' ? 'is-active' : '' }}" href="{{ route('item.index', ['tab' => 'mylist']) }}">
+            <a class="tab__item-link {{ request('tab') == 'mylist' ? 'is-active' : '' }}"
+            href="{{ route('item.index', ['tab' => 'mylist','keyword' => request('keyword')]) }}">
                 マイリスト
             </a>
         </div>
@@ -27,7 +35,7 @@
             <form class="item-card__name" action="{{ route('item.show', $item->id) }}" method="get">
                 <button class="item-card__button-submit" type="submit">
                     <div class="item-card__image-wrapper">
-                        <img class="item-card__image" src="{{ $item->image }}" alt="{{ $item->name }}">
+                        <img class="item-card__image" src="{{ asset($item->image) }}" alt="{{ $item->name }}">
                         @if($item->order)
                         <div class="item-card__sold">
                             <span class="item-card__sold-text">SOLD</span>
@@ -41,4 +49,22 @@
         @endforeach
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const message = document.getElementById('flash-message');
+
+    if (message) {
+        setTimeout(() => {
+            message.classList.add('fade-out');
+
+            // 完全に消す（DOMから削除）
+            setTimeout(() => {
+                message.remove();
+            }, 500); // CSSのtransition時間と合わせる
+        }, 5000); // 5秒後
+    }
+});
+</script>
+
 @endsection
