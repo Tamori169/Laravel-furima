@@ -30,7 +30,7 @@
     <!-- タブ -->
     <div class="tabs">
         <div class="tab__item">
-            <a class="tab__item-link {{ request('page') == 'sell' ? 'is-active' : '' }}"
+            <a class="tab__item-link {{ request('page', 'sell') == 'sell' ? 'is-active' : '' }}"
             href="{{ route('profile.show', ['page' => 'sell']) }}">
                 出品した商品
             </a>

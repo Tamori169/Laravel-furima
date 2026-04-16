@@ -132,13 +132,6 @@
                 <input class="form__content-input" type="text" name="brand"
                 value="{{ old('brand') }}">
             </div>
-            <div class="form__error">
-                <span class="form__error-text">
-                    @error('brand')
-                    {{ $message }}
-                    @enderror
-                </span>
-            </div>
         </div>
         <!-- 商品の説明 -->
         <div class="form__group">

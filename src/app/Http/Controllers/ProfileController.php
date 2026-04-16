@@ -50,7 +50,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         $profile = $user->profile;
 
-        $page = $request->query('page');
+        $page = $request->query('page', 'sell');
 
         if ($page === 'buy') {
             $items = $user->orders()
@@ -58,7 +58,7 @@ class ProfileController extends Controller
                         ->get()
                         ->pluck('item');
         } elseif ($page === 'sell') {
-            $items = $user->items;
+            $items = $user->items()->latest()->get();
         } else {
             $items = collect();
         }

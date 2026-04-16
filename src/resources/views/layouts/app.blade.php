@@ -14,10 +14,10 @@
 </head>
 <body>
     <header class="header">
-        <div class="header__logo">
+        <a class="header__logo" href="{{ route('login') }}" class="login__link">
             <img class="header__logo-image" src="{{ asset('images/logos/COACHTECHヘッダーロゴ.png') }}"
             alt="COACHTECHヘッダーロゴ">
-        </div>
+        </a>
         <div class="header__search">
             @section('search')
             <form class="search-form" method="get" action="{{ route('item.index') }}">

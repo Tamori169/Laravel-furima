@@ -48,7 +48,7 @@ class ItemController extends Controller
         }
 
         // 5. 結果を取得
-        $items = $query->get();
+        $items = $query->latest()->get();
 
         // 6. ビューに現在の状態をすべて渡す（これによって、検索窓やタブのリンクを制御します）
         return view('items.index', compact('items', 'keyword', 'tab'));

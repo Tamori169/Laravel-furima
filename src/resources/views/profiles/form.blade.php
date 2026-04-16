@@ -57,7 +57,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="name"
-                    value="{{ old('name', $user->name) }}" placeholder="{{ $user->name }}">
+                    value="{{ old('name', $user->name) }}" >
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
