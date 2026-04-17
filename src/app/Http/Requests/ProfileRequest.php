@@ -24,7 +24,19 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => ['mimes:jpeg,png'],
+            'image' => [
+                'nullable',
+                'file',
+                function ($attribute, $value, $fail) {
+                    if ($value) {
+                        $ext = strtolower($value->getClientOriginalExtension());
+
+                        if (!in_array($ext, ['jpeg', 'png'])) {
+                            $fail('プロフィール画像の拡張子は.jpeg、.pngにしてください');
+                        }
+                    }
+                },
+            ],
             'name' => ['required', 'max:20'],
             'postal_code' => ['required', 'regex:/^\d{3}-\d{4}$/'],
             'address' => ['required'],
@@ -34,7 +46,6 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.mimes' => 'プロフィール画像の拡張子は.jpeg、.pngにしてください',
             'name.required' => 'お名前を入力してください',
             'name.max' => 'お名前は20文字以内で入力してください',
             'postal_code.required' => '郵便番号を入力してください',

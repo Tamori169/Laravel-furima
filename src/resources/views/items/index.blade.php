@@ -9,9 +9,9 @@
 <div class="items__content">
     <!-- 購入完了後のメッセージ -->
     @if (session('message'))
-        <div id="flash-message" class="flash-message">
+        <span id="flash-message" class="flash-message">
             {{ session('message') }}
-        </div>
+        </span>
     @endif
     <!-- タブ -->
     <div class="tabs">

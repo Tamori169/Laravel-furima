@@ -18,6 +18,7 @@ class OrderController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
         $item = Item::findOrFail($item_id);
+        $isSold = Order::where('item_id', $item_id)->exists();
 
         // 住所変更からのリダイレクト対応 //
         $address = (object)session('custom_address', [
@@ -26,7 +27,7 @@ class OrderController extends Controller
             'building'    => $user->profile->building,
         ]);
 
-        return view('orders.create', compact('item', 'profile', 'address', 'item_id'));
+        return view('orders.create', compact('item', 'profile', 'address', 'item_id', 'isSold'));
     }
 
     public function edit($item_id)

@@ -119,9 +119,15 @@
             </table>
             <!-- 購入ボタン -->
             <div class="purchase__button">
+                @if($isSold)
+                <button class="sold__button" disabled>
+                    売り切れ
+                </button>
+                @else
                 <button class="purchase__button-submit" type="submit">
                     購入する
                 </button>
+                @endif
             </div>
         </div>
     </form>

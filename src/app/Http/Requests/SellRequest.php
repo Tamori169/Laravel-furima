@@ -26,7 +26,19 @@ class SellRequest extends FormRequest
         return [
             'name' => ['required'],
             'description' => ['required', 'max:255'],
-            'image' => ['required', 'mimes:jpeg,png'],
+            'image' => [
+                'nullable',
+                'file',
+                function ($attribute, $value, $fail) {
+                    if ($value) {
+                        $ext = strtolower($value->getClientOriginalExtension());
+
+                        if (!in_array($ext, ['jpeg', 'png'])) {
+                            $fail('プロフィール画像の拡張子は.jpeg、.pngにしてください');
+                        }
+                    }
+                },
+            ],
             'categories' => ['required', 'array'],
             'condition_id' => ['required'],
             'price' => ['required', 'integer', 'min:0'],
@@ -40,7 +52,6 @@ class SellRequest extends FormRequest
         'description.required' => '商品の説明を入力してください',
         'description.max' => '商品の説明は255文字以内で入力してください',
         'image.required' => '商品画像をアップロードしてください',
-        'image.mimes' => 'プロフィール画像の拡張子は.jpeg、.pngにしてください',
         'categories.required' => 'カテゴリーを選択してください',
         'categories.array' => 'カテゴリーを選択してください',
         'condition_id.required' => '商品の状態を選択してください',

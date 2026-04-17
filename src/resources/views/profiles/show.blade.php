@@ -14,7 +14,7 @@
             <div class="profile__image">
                 <img class="profile__image-item"
                 src="{{ $profile && $profile->image
-                ? asset($profile->image) : asset('images/profiles/Gray__profile-image.jpg') }}">
+                ? asset($profile->image) : asset('images/profiles/Gray__profile-image.jpeg') }}">
             </div>
             <!-- 名前 -->
             <div class="profile__name">

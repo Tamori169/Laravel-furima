@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,61 +15,32 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        $param = [
-            'name' => 'ファッション',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => '家電',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'インテリア',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'レディース',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'メンズ',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'コスメ',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => '本',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'ゲーム',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'スポーツ',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'キッチン',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'ハンドメイド',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'アクセサリー',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'おもちゃ',
-        ];
-        DB::table('categories')->insert($param);
-        $param = [
-            'name' => 'ベビー・キッズ',
-        ];
-        DB::table('categories')->insert($param);
+        Category::create(['name' => 'ファッション',]);
+
+        Category::create(['name' => '家電',]);
+
+        Category::create(['name' => 'インテリア',]);
+
+        Category::create(['name' => 'レディース',]);
+
+        Category::create(['name' => 'メンズ',]);
+
+        Category::create(['name' => 'コスメ',]);
+
+        Category::create(['name' => '本',]);
+
+        Category::create(['name' => 'ゲーム',]);
+
+        Category::create(['name' => 'スポーツ',]);
+
+        Category::create(['name' => 'キッチン',]);
+
+        Category::create(['name' => 'ハンドメイド',]);
+
+        Category::create(['name' => 'アクセサリー',]);
+
+        Category::create(['name' => 'おもちゃ',]);
+
+        Category::create(['name' => 'ベビー・キッズ',]);
     }
 }
