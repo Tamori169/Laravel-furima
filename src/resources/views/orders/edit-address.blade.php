@@ -8,7 +8,7 @@
 
 <div class="edit-form">
     <div class="edit-form__heading">
-        <h1>
+        <h1 class="edit-form__heading-text">
             住所の変更
         </h1>
     </div>

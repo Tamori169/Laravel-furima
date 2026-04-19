@@ -14,7 +14,7 @@
 
 <div class="profile-form">
     <div class="profile-form__heading">
-        <h1>
+        <h1 class="profile-form__heading-text">
             プロフィール設定
         </h1>
     </div>
@@ -39,7 +39,7 @@
                     onchange="previewImage(this)">
                 </div>
             </div>
-            <div class="form__error">
+            <div class="form__error-first">
                 <span class="form__error-text">
                     @error('image')
                     {{ $message }}

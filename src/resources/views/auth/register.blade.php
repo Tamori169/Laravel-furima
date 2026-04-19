@@ -11,7 +11,7 @@
 
 <div class="register-form">
     <div class="register-form__heading">
-        <h1>
+        <h1 class="register-form__heading-text">
             会員登録
         </h1>
     </div>

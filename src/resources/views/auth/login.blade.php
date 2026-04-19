@@ -11,7 +11,7 @@
 
 <div class="login-form">
     <div class="login-form__heading">
-        <h1>
+        <h1 class="login-form__heading-text">
             ログイン
         </h1>
     </div>
