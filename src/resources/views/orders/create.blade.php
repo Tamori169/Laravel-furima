@@ -62,13 +62,13 @@
                             配送先
                         </h2>
                     </div>
-                    <div class="form__shipping-address--content">
+                    <div class="form__shipping-address--content-first">
                         <span class="form__shipping-address--character">〒</span>
                         <input class="form__shipping-address--postal-code" type="text" name="postal_code"
                         value="{{ $address->postal_code ?? ''}}" readonly>
                         </input>
                     </div>
-                    <div class="form__shipping-address--content">
+                    <div class="form__shipping-address--content-second">
                         <input class="form__shipping-address--address" type="text" name="address"
                         value="{{ $address->address ?? ''}}" readonly>
                         <input class="form__shipping-address--building" type="text" name="building"

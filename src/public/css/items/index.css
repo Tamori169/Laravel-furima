@@ -29,11 +29,11 @@
 
 .tab__item {
     position: relative;
-    width: 8%;
+    width: 50%;
 }
 
 .tab__item:first-child {
-    margin-left: 300px;
+    margin-left: 10%;
 }
 
 .tab__item-link {
@@ -67,7 +67,7 @@
 }
 
 .item-card__image {
-    width: 250px;
+    width: 100%;
     height: auto;
 }
 
@@ -122,9 +122,26 @@
     text-align: center;
 }
 
-/* おまけ：売り切れ商品の画像に少しフィルターをかけると分かりやすい */
+/* 売り切れ商品の画像に少しフィルターをかけると分かりやすい */
 .item-card__sold+.item-card__image {
     filter: brightness(0.8);
     /* 少し暗くする */
 }
 
+/* レスポンシブ対応 */
+
+@media screen and (max-width: 767px) {
+    
+}
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+}
+
+@media screen and (min-width: 851px) and (max-width: 1399px) {
+
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+
+}

@@ -102,11 +102,13 @@
                     <p class="item-detail__categories-label">
                         カテゴリー
                     </p>
-                    @foreach($item->categories as $category)
-                    <p class="item-detail__categories-content">
-                        {{ $category->name }}
-                    </p>
-                    @endforeach
+                    <div class="item-detail__categories-wrapper">
+                        @foreach($item->categories as $category)
+                            <p class="item-detail__categories-content">
+                                {{ $category->name }}
+                            </p>
+                        @endforeach
+                    </div>
                 </div>
                 <!-- コンディション -->
                 <div class="item-detail__condition">

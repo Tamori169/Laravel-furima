@@ -68,12 +68,13 @@
 }
 
 .form__payment-method--content,
-.form__shipping-address--content {
+.form__shipping-address--content-first,
+.form__shipping-address--content-second {
     margin-left: 100px;
 }
 
 .form__payment-method--content,
-.form__shipping-address--content:first-child {
+.form__shipping-address--content-first {
     margin-top: 50px;
 }
 
@@ -90,8 +91,12 @@
     width: 100%;
 }
 
-.form__shipping-address--content {
+.form__shipping-address--content-first,
+.form__shipping-address--content-second {
     width: 100%;
+}
+
+.form__shipping-address--content-first {
     display: flex;
 }
 
@@ -172,5 +177,183 @@
     color: red;
     font-size: 16px;
     font-weight: bold;
+}
+
+/* レスポンシブ対応 */
+
+@media screen and (max-width: 767px) {
+
+    .form {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        max-width: 450px;
+    }
+
+    .form__left-wrapper,
+    .form__right-wrapper {
+        width: 100%;
+    }
+
+    .form__item-info {
+        display: block;
+    }
+
+    .form__image-wrapper {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .form__info-wrapper {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .form__name--text {
+        font-size: 24px;
+    }
+
+    .form__price {
+        margin-top: 5px;
+    }
+
+    .form__right-wrapper {
+        margin-top: 50px;
+    }
+
+    .form__payment-method--text,
+    .form__shipping-address--text {
+        margin-left: -10%;
+    }
+
+    .form__shipping-address--wrapper {
+        display: block;
+    }
+
+    .form__payment-method--text,
+    .form__shipping-address--text {
+        font-size: 20px;
+    }
+
+    .form__payment-method--content {
+        margin: 0 auto;
+    }
+
+    .form__payment-method--select,
+    .form__shipping-address--content {
+        width: 100%;
+    }
+
+    .form__shipping-address--content-first,
+    .form__shipping-address--content-second {
+        margin-left: 0;
+    }
+
+    .update__form {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form__error {
+        margin-left: 0;
+    }
+
+    .form__error-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+    .form {
+        gap: 10%;
+    }
+    .form__left-wrapper {
+        width: 55%;
+    }
+
+    .form__right-wrapper {
+        width: 40%;
+    }
+
+    .form__item-info {
+        display: block;
+    }
+
+    .form__image-wrapper {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .form__info-wrapper {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .form__name {
+        margin-bottom: 30px;
+    }
+
+    .form__name--text {
+        font-size: 22px;
+    }
+
+    .form__price-currency,
+    .form__price-amount {
+        font-size: 22px;
+    }
+
+    .form__price {
+        margin-bottom: -50px;
+    }
+
+    .form__shipping-address--wrapper {
+        display: block;
+    }
+
+    .form__payment-method--text,
+    .form__shipping-address--text {
+        margin-left: -5%;
+    }
+
+    .form__payment-method--content,
+    .form__shipping-address--content-first,
+    .form__shipping-address--content-second {
+        width: 150%;
+        margin: 0 auto;
+    }
+
+    .update__form {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form__error {
+        margin-left: 0;
+    }
+
+    .form__error-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 851px) and (max-width: 1399px) {
+
+    .purchase-form {
+        max-width: 1000px;
+    }
+
+    .form__image-wrapper {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+
+    .purchase-form {
+        max-width: 1200px;
+    }
 }
 
