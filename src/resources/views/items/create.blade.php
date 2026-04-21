@@ -8,7 +8,7 @@
 
 <div class="sell-form">
     <div class="sell-form__heading">
-        <h1>
+        <h1 class="sell-form__heading-text">
             商品の出品
         </h1>
     </div>
@@ -22,13 +22,19 @@
                 </p>
             </div>
             <div class="form__image-content">
-                <div class="form__image-upload">
+                <img id="preview" class="form__image-preview" src="" alt="preview" hidden>
+                <div class="form__image-upload" id="upload-area">
                     <label class="form__image-file" for="image-upload">
                         画像を選択する
                     </label>
-                    <input id="image-upload" type="file" name="image"
-                    onchange="previewImage(this)">
                 </div>
+                <div class="form__image-overlay" id="overlay" hidden>
+                    <label for="image-upload" class="form__image-change">
+                        変更
+                    </label>
+                </div>
+                <input id="image-upload" type="file" name="image"
+                onchange="previewImage(this)">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -179,5 +185,29 @@
         </div>
     </form>
 </div>
+
+<script>
+function previewImage(input) {
+    const file = input.files[0];
+    const preview = document.getElementById('preview');
+    const overlay = document.getElementById('overlay');
+    const uploadArea = document.getElementById('upload-area');
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.hidden = false;
+            overlay.hidden = false;
+
+            // ▼変更：初期UIを消す
+            uploadArea.style.display = 'none';
+        }
+
+        reader.readAsDataURL(file);
+    }
+}
+</script>
 
 @endsection

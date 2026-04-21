@@ -1,7 +1,9 @@
 .login-form {
+    text-align: center;
+    margin: 0 auto;
+    width: 55%;
     margin-top: 30px;
     margin-bottom: 100px;
-    text-align: center;
 }
 
 .form {
@@ -55,7 +57,7 @@
 }
 
 .form__button-submit {
-    width: 50%;
+    width: 80%;
     height: 50px;
     font-size: 20px;
     font-weight: bold;
@@ -81,33 +83,6 @@
 
 /* レスポンシブ対応 */
 
-@media screen and (max-width: 767px) {
-
-    .login-form__heading-text {
-        font-size: 20px;
-    }
-
-    .form__label--item {
-        font-size: 16px;
-    }
-
-    .form__group-title,
-    .form__group-content {
-        width: 80%;
-        max-width: 350px;
-    }
-
-    .form__button-submit {
-        width: 60%;
-        font-size: 18px;
-        max-width: 270px;
-    }
-
-    .form__error-text {
-        font-size: 14px;
-    }
-}
-
 @media screen and (min-width: 768px) and (max-width: 850px) {
 
     .login-form__heading-text {
@@ -118,16 +93,8 @@
         font-size: 16px;
     }
 
-    .form__group-title,
-    .form__group-content {
-        width: 60%;
-        max-width: 400px;
-    }
-
     .form__button-submit {
-        width: 60%;
         font-size: 20px;
-        max-width: 400px;
     }
 
     .form__error-text {
@@ -135,28 +102,9 @@
     }
 }
 
-@media screen and (min-width: 851px) and (max-width: 1399px) {
-
-    .form__group-title,
-    .form__group-content {
-        width: 55%;
-        max-width: 450px;
-    }
-
-    .form__button-submit {
-        width: 55%;
-        max-width: 450px;
-    }
-}
-
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
 
-    .form__group-title,
-    .form__group-content {
-        max-width: 500px;
-    }
-
-    .form__button-submit {
-        max-width: 500px;
+    .login-form {
+        max-width: 1540px;
     }
 }

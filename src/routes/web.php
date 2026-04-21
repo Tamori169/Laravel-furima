@@ -29,6 +29,10 @@ Route::get('/',[ItemController::class,'index'])
 Route::get('/item/{item_id}',[ItemController::class,'show'])
     ->name('item.show');
 
+// Stripe webhook受信用ルート //
+Route::post('/stripe/webhook', [OrderController::class, 'webhook'])
+    ->name('stripe.webhook');
+
 // 認証ユーザのみ可能な処理 //
 Route::middleware(['auth'])->group(function () {
     Route::post('/item/{item_id}/comment',[CommentController::class,'store'])
@@ -41,8 +45,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('order.create');
     Route::post('/purchase/{item_id}',[OrderController::class,'store'])
         ->name('order.store');
-    Route::get('/success', [OrderController::class, 'success'])
-        ->name('order.success');
+    Route::get('/complete', [OrderController::class, 'complete'])
+        ->name('order.complete');
     Route::get('/purchase/address/{item_id}',[OrderController::class,'edit'])
         ->name('order.edit');
     Route::patch('/purchase/address/{item_id}',[OrderController::class,'update'])

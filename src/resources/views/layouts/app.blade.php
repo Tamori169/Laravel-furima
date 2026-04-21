@@ -29,36 +29,55 @@
             </form>
             @show
         </div>
+        @section('nav')
         <nav class="header__nav">
-            @section('nav')
-            <!-- ログイン/ログアウト -->
-            <div class="header__nav-items">
-                <!-- ログインしている場合 -->
-                @auth
-                <form class="logout__button" method="post" action="{{ route('logout') }}">
-                @csrf
-                    <button class="logout__button-submit" type="submit">ログアウト</button>
-                </form>
-                @endauth
-                <!-- ログインしていない場合 -->
-                @guest
-                <a href="{{ route('login') }}" class="login__link">ログイン</a>
-                @endguest
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <!-- マイページ -->
-            <div class="header__nav-items">
-                <a href="{{ route('profile.show') }}" class="mypage__link">マイページ</a>
+            <div class="nav-menu" id="nav-menu">
+                <!-- ログイン/ログアウト -->
+                <div class="header__nav-items">
+                    <!-- ログインしている場合 -->
+                    @auth
+                    <form class="logout__button" method="post" action="{{ route('logout') }}">
+                    @csrf
+                        <button class="logout__button-submit" type="submit">ログアウト</button>
+                    </form>
+                    @endauth
+                    <!-- ログインしていない場合 -->
+                    @guest
+                    <a href="{{ route('login') }}" class="login__link">ログイン</a>
+                    @endguest
+                </div>
+                <!-- マイページ -->
+                <div class="header__nav-items">
+                    <a href="{{ route('profile.show') }}" class="mypage__link">マイページ</a>
+                </div>
+                <!-- 出品 -->
+                <div class="header__nav-items">
+                    <a href="{{ route('item.create') }}" class="sell__link">出品</a>
+                </div>
             </div>
-            <!-- 出品 -->
-            <div class="header__nav-items">
-                <a href="{{ route('item.create') }}" class="sell__link">出品</a>
-            </div>
-            @show
         </nav>
+        @show
     </header>
     <main>
         @yield('content')
     </main>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', function () {
+                navMenu.classList.toggle('active');
+            });
+        }
+    });
+    </script>
     @stack('scripts')
 </body>
 </html>

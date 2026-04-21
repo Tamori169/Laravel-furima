@@ -307,6 +307,6 @@
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
     .item-detail__info-wrapper {
-        max-width: 1200px;
+        max-width: 1540px;
     }
 }

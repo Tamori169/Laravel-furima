@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="purchase-form">
-    <form class="form" action="{{ route('order.store', $item->id) }}" method="post">
+    <form class="form" action="{{ route('order.store', $item->id) }}" method="post" target="_blank">
         @csrf
         <!-- 画面左側 -->
         <div class="form__left-wrapper">

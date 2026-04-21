@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use Stripe\Exception\SignatureVerificationException;
+use Stripe\Webhook;
+use UnexpectedValueException;
 
 class OrderController extends Controller
 {
@@ -20,11 +23,10 @@ class OrderController extends Controller
         $item = Item::findOrFail($item_id);
         $isSold = Order::where('item_id', $item_id)->exists();
 
-        // 住所変更からのリダイレクト対応 //
         $address = (object)session('custom_address', [
-            'postal_code' => $user->profile->postal_code,
-            'address'     => $user->profile->address,
-            'building'    => $user->profile->building,
+            'postal_code' => optional($profile)->postal_code ?? '',
+            'address'     => optional($profile)->address ?? '',
+            'building'    => optional($profile)->building ?? '',
         ]);
 
         return view('orders.create', compact('item', 'profile', 'address', 'item_id', 'isSold'));
@@ -52,8 +54,10 @@ class OrderController extends Controller
 
         Stripe::setApiKey(config('services.stripe.secret'));
 
-        $session = Session::create([
-            'payment_method_types' => ['card'],
+        $paymentMethodType = $request->payment_method === 'コンビニ払い' ? 'konbini' : 'card';
+
+        $sessionParams = [
+            'payment_method_types' => [$paymentMethodType],
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'jpy',
@@ -68,36 +72,83 @@ class OrderController extends Controller
 
             'metadata' => [
                 'item_id'        => $item->id,
+                'user_id'        => auth()->id(),
                 'postal_code'    => $request->postal_code,
                 'address'        => $request->address,
                 'building'       => $request->building,
                 'payment_method' => $request->payment_method,
             ],
 
-            'success_url' => route('order.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('order.complete'),
             'cancel_url' => url('/'),
-        ]);
+        ];
+
+        if ($paymentMethodType === 'konbini') {
+            $sessionParams['customer_email'] = 'succeed_immediately@test.com';
+            $sessionParams['payment_method_options'] = [
+                'konbini' => [
+                    'expires_after_days' => 3,
+                ],
+            ];
+        }
+
+        $session = Session::create($sessionParams);
 
         return redirect($session->url);
     }
 
-    public function success(Request $request)
+    public function complete()
     {
-        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+        return redirect()->route('item.index')->with('message', '商品の購入が完了しました');
+    }
 
-        $session = \Stripe\Checkout\Session::retrieve($request->session_id);
+    public function webhook(Request $request)
+    {
+        $payload = $request->getContent();
+        $signature = $request->header('Stripe-Signature');
+        $secret = config('services.stripe.webhook_secret');
 
+        try {
+            $event = Webhook::constructEvent($payload, $signature, $secret);
+        } catch (UnexpectedValueException $e) {
+            return response('Invalid payload', 400);
+        } catch (SignatureVerificationException $e) {
+            return response('Invalid signature', 400);
+        }
+
+        switch ($event->type) {
+            case 'checkout.session.completed':
+                $session = $event->data->object;
+
+                if (($session->payment_status ?? null) === 'paid') {
+                    $this->createOrderIfNotExists($session);
+                }
+                break;
+
+            case 'checkout.session.async_payment_succeeded':
+                $session = $event->data->object;
+                $this->createOrderIfNotExists($session);
+                break;
+        }
+
+        return response('OK', 200);
+    }
+
+    private function createOrderIfNotExists($session)
+    {
         $data = $session->metadata;
 
+        if (Order::where('item_id', $data->item_id)->exists()) {
+            return;
+        }
+
         Order::create([
-            'user_id'        => auth()->id(),
+            'user_id'        => $data->user_id,
             'item_id'        => $data->item_id,
             'postal_code'    => $data->postal_code,
             'address'        => $data->address,
             'building'       => $data->building,
             'payment_method' => $data->payment_method,
         ]);
-
-        return redirect()->route('item.index')->with('message', '商品の購入が完了しました');
     }
 }

@@ -6,10 +6,6 @@
     margin-bottom: 100px;
 }
 
-.form {
-    text-align: center;
-}
-
 .sell-form__subheading {
     text-align: left;
     border-bottom: 1px solid #000;
@@ -40,6 +36,14 @@
     border: 1px dashed #aaa;
     height: 150px;
     margin-top: -15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.form__image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 #image-upload {
@@ -47,9 +51,11 @@
 }
 
 .form__image-upload {
-    margin-top: 40px;
-    text-align: center;
-    padding: 20px 0 0 0;
+    margin-top: 0px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form__image-file {
@@ -65,6 +71,36 @@
 .form__image-file:hover {
     color: #cc0000;
     border: 2px solid #cc0000;
+}
+
+.form__image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.form__image-content:hover .form__image-overlay {
+    opacity: 1;
+}
+
+.form__image-change {
+    padding: 8px 20px;
+    background: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form__image-change:hover {
+    background: #f0f0f0;
 }
 
 .form__content,
@@ -178,8 +214,44 @@
     font-weight: bold;
 }
 
+[hidden] {
+    display: none !important;
+}
+
 /* レスポンシブ対応 */
 
-@media screen and (min-width: 768px) and (max-width: 850px) {}
+@media screen and (min-width: 768px) and (max-width: 850px) {
 
-@media screen and (min-width: 1400px) and (max-width: 1540px) {}
+    .sell-form {
+        width: 55%;
+    }
+
+    .sell-form__heading-text {
+        font-size: 22px;
+    }
+
+    .form__image-file {
+        width: 40%;
+    }
+
+    .sell-form__subheading-text,
+    .form__button-submit {
+        font-size: 20px;
+    }
+
+    .form__title-label,
+    .form__label--item {
+        font-size: 16px;
+    }
+
+    .form__error-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+
+    .sell-form {
+        max-width: 1230px;
+    }
+}
