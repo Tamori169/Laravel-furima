@@ -150,6 +150,7 @@
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
+
     .form__group-title,
     .form__group-content {
         max-width: 500px;

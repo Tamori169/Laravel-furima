@@ -32,7 +32,7 @@
     <div class="items-list">
         @foreach ($items as $item)
         <div class="item-card">
-            <form class="item-card__name" action="{{ route('item.show', $item->id) }}" method="get">
+            <form class="form" action="{{ route('item.show', $item->id) }}" method="get">
                 <button class="item-card__button-submit" type="submit">
                     <div class="item-card__image-wrapper">
                         <img class="item-card__image" src="{{ asset($item->image) }}" alt="{{ $item->name }}">
@@ -42,7 +42,11 @@
                         </div>
                         @endif
                     </div>
-                    {{ $item->name }}
+                    <div class="item-card__name">
+                        <span class="item-card__name-text">
+                            {{ $item->name }}
+                        </span>
+                    </div>
                 </button>
             </form>
         </div>

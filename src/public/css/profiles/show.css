@@ -6,21 +6,26 @@
 
 .profile__content {
     display: flex;
-    width: 70%;
     margin: 0 auto;
-    justify-content: space-between;
 }
 
 .profile__content-wrapper {
-    margin-left: 10%;
+    width: 70%;
+    margin-left: 2%;
     display: flex;
     align-items: center;
-    gap: 50px;
+    text-align: left;
+    gap: 15%;
+    padding-left: 15%;
+}
+
+.profile__image {
+    width: 18%;
 }
 
 .profile__image-item {
-    width: 120px;
-    height: 120px;
+    width: 100%;
+    height: 100%;
     border: none;
     border-radius: 50%;
 }
@@ -31,7 +36,7 @@
 }
 
 .edit-profile__link {
-    width: 250px;
+    width: 100%;
     padding: 5px 20px;
     color: #FF0000;
     font-weight: bolder;
@@ -50,7 +55,6 @@
     margin-top: 30px;
     display: flex;
     height: 80px;
-    gap: 10px;
     border-bottom: 1px solid #2D3748;
 }
 
@@ -81,26 +85,22 @@
 .items-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
-    max-width: 1300px;
+    gap: 5%;
     justify-content: flex-start;
-    margin: 50px 0 100px 120px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    padding-left: 4%;
 }
 
 .item-card {
     width: 20%;
-    gap: 50px;
     float: right;
+    margin-bottom: 30px;
 }
 
 .item-card__image {
     width: 100%;
     height: auto;
-}
-
-
-.item-card__name {
-    margin-top: 10px;
 }
 
 .item-card__button-submit {
@@ -154,4 +154,71 @@
 .item-card__sold+.item-card__image {
     filter: brightness(0.8);
     /* 少し暗くする */
+}
+
+/* レスポンシブ対応 */
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+
+    .mypage__content {
+        margin-top: 30px;
+    }
+
+    .profile__content-wrapper {
+        gap: 10%;
+    }
+
+    .profile__image {
+        width: 23%;
+    }
+
+    .profile__name-text {
+        font-size: 24px;
+    }
+
+    .edit-profile__link {
+        font-size: 14px;
+    }
+
+    .tabs {
+        margin-top: 0px;
+    }
+
+    .tab__item {
+        position: relative;
+        width: 26%;
+    }
+
+    .tab__item:first-child {
+        margin-left: 2%;
+    }
+
+    .tab__item-link {
+        font-size: 16px;
+    }
+
+    .items-list {
+        gap: 2%;
+        padding-left: 6%;
+    }
+
+    .item-card {
+        width: 22%;
+        margin-bottom: 30px;
+    }
+
+    .item-card__name {
+        margin-top: -100px;
+    }
+
+    .item-card__button-submit {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+
+    .items-list {
+        max-width: 1540px;
+    }
 }

@@ -12,10 +12,10 @@
 <div class="verify-email">
     <div class="verify-email__content">
         <!-- 案内文 -->
-        <p class="verify-email__text">
+        <span class="verify-email__text">
             登録していただいたメールアドレスに認証メールを送付しました。</br>
             メール認証を完了してください。
-        </p>
+        </span>
         <!-- 認証リンク -->
         <a class="verify-email__verify-link" href="http://127.0.0.1:8025/" target="_blank">認証はこちらから</a>
         <!-- 認証メール再送信フォーム -->
