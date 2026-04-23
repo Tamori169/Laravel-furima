@@ -38,7 +38,7 @@
                         <img class="item-card__image" src="{{ asset($item->image) }}" alt="{{ $item->name }}">
                         @if($item->order)
                         <div class="item-card__sold">
-                            <span class="item-card__sold-text">SOLD</span>
+                            <span class="item-card__sold-text">Sold</span>
                         </div>
                         @endif
                     </div>
