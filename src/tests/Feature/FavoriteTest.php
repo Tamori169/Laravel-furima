@@ -14,19 +14,19 @@ class FavoriteTest extends TestCase
     // いいねアイコンを押下することによって、いいねした商品として登録することができる。
     public function test_user_can_favorite_an_item()
     {
-        $user1 = User::factory()->create();
-        $user2 = User::factory()->create();
+        $user = User::factory()->create();
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item = Item::factory()->create(['user_id' => $user2->id]);
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
         $response = $this->post('/login', [
-            'email' => $user1->email,
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticatedAs($user1);
+        $this->assertAuthenticatedAs($user);
 
         $response = $this->get("/item/{$item->id}");
         $response->assertStatus(200);
@@ -43,7 +43,7 @@ class FavoriteTest extends TestCase
         ], false);
 
         $this->assertDatabaseHas('favorites', [
-            'user_id' => $user1->id,
+            'user_id' => $user->id,
             'item_id' => $item->id,
         ]);
     }
@@ -51,19 +51,19 @@ class FavoriteTest extends TestCase
     // 追加済みのアイコンは色が変化する
     public function test_user_sees_favorite_icon_when_item_is_favorited()
     {
-        $user1 = User::factory()->create();
-        $user2 = User::factory()->create();
+        $user = User::factory()->create();
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item = Item::factory()->create(['user_id' => $user2->id]);
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
         $response = $this->post('/login', [
-            'email' => $user1->email,
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticatedAs($user1);
+        $this->assertAuthenticatedAs($user);
 
         $response = $this->get("/item/{$item->id}");
         $response->assertStatus(200);
@@ -74,24 +74,25 @@ class FavoriteTest extends TestCase
         $response = $this->get("/item/{$item->id}");
         $response->assertStatus(200);
         $response->assertSee('images/logos/ハートロゴ_ピンク.png');
+        $response->assertDontSee('images/logos/ハートロゴ_デフォルト.png');
     }
 
     // 再度いいねアイコンを押下することによって、いいねを解除することができる。
     public function test_user_can_unfavorite_an_item()
     {
-        $user1 = User::factory()->create();
-        $user2 = User::factory()->create();
+        $user = User::factory()->create();
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item = Item::factory()->create(['user_id' => $user2->id]);
+        $item = Item::factory()->create(['user_id' => $seller->id]);
 
         $response = $this->post('/login', [
-            'email' => $user1->email,
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticatedAs($user1);
+        $this->assertAuthenticatedAs($user);
 
         $response = $this->get("/item/{$item->id}");
 
@@ -111,7 +112,7 @@ class FavoriteTest extends TestCase
         ], false);
 
         $this->assertDatabaseMissing('favorites', [
-            'user_id' => $user1->id,
+            'user_id' => $user->id,
             'item_id' => $item->id,
         ]);
     }

@@ -17,11 +17,12 @@ class MylistIndexTest extends TestCase
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item1 = Item::factory()->create(['name' => 'テスト商品']);
-        $item2 = Item::factory()->create(['name' => 'サンプル商品']);
+        $item1 = Item::factory()->create(['name' => 'テスト商品', 'user_id' => $seller->id]);
+        $item2 = Item::factory()->create(['name' => 'サンプル商品', 'user_id' => $seller->id]);
 
         $user->favorites()->attach($item1->id);
 
@@ -37,10 +38,11 @@ class MylistIndexTest extends TestCase
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item = Item::factory()->create();
+        $item = Item::factory()->create(['user_id' => $seller->id]  );
 
         $user->favorites()->attach($item->id);
 

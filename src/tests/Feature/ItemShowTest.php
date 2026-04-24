@@ -16,21 +16,21 @@ class ItemShowTest extends TestCase
     // ※いいねはFavoriteTestにてテストするため、0件とする
     public function test_item_show_displays_all_information()
     {
-        /** @var \App\Models\User $user1 */
-        $user1 = User::factory()->create();
-        $profile = Profile::factory()->create(['user_id' => $user1->id]);
-        $user2 = User::factory()->create();
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+        $profile = Profile::factory()->create(['user_id' => $user->id]);
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item = Item::factory()->singleCategory()->create(['user_id' => $user2->id]);
+        $item = Item::factory()->singleCategory()->create(['user_id' => $seller->id]);
 
         $item->comments()->create([
-            'user_id' => $user1->id,
+            'user_id' => $user->id,
             'comment' => 'テストコメント',
         ]);
 
-        $response = $this->actingAs($user1)->get("/item/{$item->id}");
+        $response = $this->actingAs($user)->get("/item/{$item->id}");
 
         $response->assertStatus(200);
         $response->assertSee($item->image);
@@ -50,23 +50,23 @@ class ItemShowTest extends TestCase
         $response->assertSee($item->description);
         $response->assertSee($item->categories->first()->name);
         $response->assertSee($item->condition->name);
-        $response->assertSee($user1->profile->image);
-        $response->assertSee($user1->name);
+        $response->assertSee($user->profile->image);
+        $response->assertSee($user->name);
         $response->assertSee('テストコメント');
     }
 
     // 複数選択されたカテゴリが表示されているか
     public function test_item_show_displays_all_categories()
     {
-        /** @var \App\Models\User $user1 */
-        $user1 = User::factory()->create();
-        $user2 = User::factory()->create();
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+        $seller = User::factory()->create();
 
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item = Item::factory()->multipleCategories()->create(['user_id' => $user2->id]);
+        $item = Item::factory()->multipleCategories()->create(['user_id' => $seller->id]);
 
-        $response = $this->actingAs($user1)->get("/item/{$item->id}");
+        $response = $this->actingAs($user)->get("/item/{$item->id}");
 
         $response->assertStatus(200);
         foreach ($item->categories as $category) {

@@ -14,7 +14,7 @@
                 <!-- 商品画像 -->
                 <div class="form__image-wrapper">
                     <img class="form__image" src="{{ asset($item->image) }}"
-                    alt="{{ $item->name }}">
+                        alt="{{ $item->name }}">
                 </div>
                 <div class="form__info-wrapper">
                     <!-- 商品名 -->
@@ -66,7 +66,6 @@
                         <span class="form__shipping-address--character">〒</span>
                         <input class="form__shipping-address--postal-code" type="text" name="postal_code"
                         value="{{ $address->postal_code ?? ''}}" readonly>
-                        </input>
                     </div>
                     <div class="form__shipping-address--content-second">
                         <input class="form__shipping-address--address" type="text" name="address"
@@ -105,7 +104,7 @@
                         商品代金
                     </th>
                     <td class="purchase-table__price">
-                            ¥{{ number_format($item->price) }}
+                        ¥{{ number_format($item->price) }}
                     </td>
                 </tr>
                 <tr class="purchase-table__row">
@@ -113,7 +112,7 @@
                         支払い方法
                     </th>
                     <td class="purchase-table__payment-method" id="display-payment">
-                        ー
+                        {{ session('payment_method', 'ー') }}
                     </td>
                 </tr>
             </table>
