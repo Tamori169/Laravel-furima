@@ -31,7 +31,8 @@
 .item-detail__description,
 .item-detail__specs,
 .item-detail__comments,
-.purchase__button {
+.purchase__button,
+.sold__button {
     width: 100%;
 }
 

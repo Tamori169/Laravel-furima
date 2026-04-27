@@ -64,64 +64,62 @@
 .item-card {
     width: 20%;
     float: right;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.item-card__link {
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .item-card__image {
     width: 100%;
-    height: auto;
 }
 
-.item-card__button-submit {
+.item-card__name-text {
     background: none;
     border: none;
     font-size: 18px;
     color: #000000;
-    cursor: pointer;
 }
+
 /* 「sold」表示の装飾（親要素） */
 .item-card__image-wrapper {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 280px;
+    margin-bottom: 10px;
 }
 
-/* SOLDラベルの土台（赤い三角形を作る） */
+/* SOLDラベルの土台 */
 .item-card__sold {
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    border-top: 100px solid #ff4d4d;
-    /* ラベルのサイズ（赤色） */
-    border-right: 100px solid transparent;
-    /* 斜めにするための透明設定 */
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    background-color: #ff4d4d;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-/* SOLDの文字（斜めに配置） */
+/* SOLDの文字 */
 .item-card__sold-text {
     position: absolute;
-    top: -70px;
-    /* ラベル内での位置調整 */
-    left: 10px;
-    /* ラベル内での位置調整 */
+    top: 30%;
+    left: 20%;
     color: #ffffff;
-    font-size: 20px;
+    font-size: clamp(15px, 1.2vw, 20px);
     font-weight: bold;
     transform: rotate(-45deg);
-    /* 文字を45度傾ける */
     white-space: nowrap;
     display: block;
-    width: 50px;
-    text-align: center;
 }
 
 /* 売り切れ商品の画像に少しフィルターをかけると分かりやすい */
 .item-card__sold+.item-card__image {
     filter: brightness(0.8);
-    /* 少し暗くする */
 }
 
 /* レスポンシブ対応 */
@@ -151,11 +149,7 @@
         margin-bottom: 30px;
     }
 
-    .item-card__name {
-        margin-top: -100px;
-    }
-
-    .item-card__button-submit {
+    .item-card__name-text {
         font-size: 16px;
     }
 }

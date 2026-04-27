@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="edit-profile">
-            <a class="edit-profile__link "href="{{ route('profile.edit') }}">
+            <a class="edit-profile__link " href="{{ route('profile.edit') }}">
                 プロフィールを編集
             </a>
         </div>
@@ -29,13 +29,13 @@
     <div class="tabs">
         <div class="tab__item">
             <a class="tab__item-link {{ request('page', 'sell') == 'sell' ? 'is-active' : '' }}"
-            href="{{ route('profile.show', ['page' => 'sell']) }}">
+                href="{{ route('profile.show', ['page' => 'sell']) }}">
                 出品した商品
             </a>
         </div>
         <div class="tab__item">
             <a class="tab__item-link {{ request('page') == 'buy' ? 'is-active' : '' }}"
-            href="{{ route('profile.show', ['page' => 'buy']) }}">
+                href="{{ route('profile.show', ['page' => 'buy']) }}">
                 購入した商品
             </a>
         </div>
@@ -44,23 +44,23 @@
     <div class="items-list">
         @foreach ($items as $item)
         <div class="item-card">
-            <form class="form" action="{{ route('item.show', $item->id) }}" method="get">
-                <button class="item-card__button-submit" type="submit">
-                    <div class="item-card__image-wrapper">
-                        <img class="item-card__image" src="{{ asset($item->image) }}" alt="{{ $item->name }}">
-                        @if($item->order)
-                        <div class="item-card__sold">
-                            <span class="item-card__sold-text">SOLD</span>
-                        </div>
-                        @endif
-                    </div>
-                    <div class="item-card__name">
-                        <span class="item-card__name-text">
-                            {{ $item->name }}
+            <a class="item-card__link" href="{{ route('item.show', $item->id) }}">
+                <div class="item-card__image-wrapper">
+                    <img class="item-card__image" src="{{ asset($item->image) }}" alt="{{ $item->name }}">
+                    @if($item->order)
+                    <div class="item-card__sold">
+                        <span class="item-card__sold-text">
+                            Sold
                         </span>
                     </div>
-                </button>
-            </form>
+                    @endif
+                </div>
+                <div class="item-card__name">
+                    <span class="item-card__name-text">
+                        {{ $item->name }}
+                    </span>
+                </div>
+            </a>
         </div>
         @endforeach
     </div>
