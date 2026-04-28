@@ -12,7 +12,7 @@
             商品の出品
         </h1>
     </div>
-    <form class="form" action="{{ route('item.create') }}" method="POST" enctype="multipart/form-data" novalidate>
+    <form class="form" action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
         <!-- 商品画像 -->
         <div class="form__group">

@@ -27,7 +27,7 @@ class SellRequest extends FormRequest
             'name' => ['required'],
             'description' => ['required', 'max:255'],
             'image' => [
-                'nullable',
+                'required',
                 'file',
                 function ($attribute, $value, $fail) {
                     if ($value) {
