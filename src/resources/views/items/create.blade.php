@@ -147,7 +147,7 @@
                 </p>
             </div>
             <div class="form__content">
-                <textarea class="form__content-textarea" type="text" name="description">{{ old('description') }}</textarea>
+                <textarea class="form__content-textarea" name="description">{{ old('description') }}</textarea>
             </div>
             <div class="form__error">
                 <span class="form__error-text">

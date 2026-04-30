@@ -34,7 +34,7 @@ class SellRequest extends FormRequest
                         $ext = strtolower($value->getClientOriginalExtension());
 
                         if (!in_array($ext, ['jpeg', 'png'])) {
-                            $fail('プロフィール画像の拡張子は.jpeg、.pngにしてください');
+                            $fail('商品画像の拡張子は.jpeg、.pngにしてください');
                         }
                     }
                 },
