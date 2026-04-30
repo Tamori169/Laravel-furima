@@ -59,6 +59,7 @@
     margin-top: 50px;
     margin-bottom: 100px;
     padding-left: 4%;
+    padding-right: 4%;
 }
 
 .item-card {
@@ -125,6 +126,36 @@
 
 /* レスポンシブ対応 */
 
+@media screen and (max-width: 768px) {
+
+    .tab__item {
+        position: relative;
+        width: 25%;
+    }
+
+    .tab__item:first-child {
+        margin-left: 20%;
+    }
+
+    .tab__item-link {
+        font-size: 16px;
+    }
+
+    .items-list {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+    .item-card {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .item-card__name-text {
+        font-size: 16px;
+    }
+}
+
 @media screen and (min-width: 768px) and (max-width: 850px) {
 
     .tab__item {
@@ -141,17 +172,44 @@
     }
 
     .items-list {
-        gap: 2%;
+        gap: 10%;
         padding-left: 6%;
+        padding-right: 6%;
     }
 
     .item-card {
-        width: 22%;
+        width: 40%;
         margin-bottom: 30px;
     }
 
     .item-card__name-text {
         font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 851px) and (max-width: 1399px) {
+
+    .tab__item:first-child {
+        margin-left: 20%;
+    }
+
+    .tab__item-link {
+        font-size: 18px;
+    }
+
+    .items-list {
+        gap: 3%;
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    .item-card {
+        width: 30%;
+        margin-bottom: 30px;
+    }
+
+    .item-card__name-text {
+        font-size: 18px;
     }
 }
 
