@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/layouts/common.css') }}" />
-        @yield('css')
+    @yield('css')
 </head>
+
 <body>
     <header class="header">
         <a class="header__logo" href="{{ route('item.index') }}">
-            <img class="header__logo-image" src="{{ asset('images/logos/COACHTECHヘッダーロゴ.png') }}"
-            alt="COACHTECHヘッダーロゴ">
+            <img class="header__logo-image header__logo-image--desktop" src="{{ asset('images/logos/header-logo-desktop.png') }}"
+                alt="COACHTECH">
+            <img class="header__logo-image header__logo-image--mobile" src="{{ asset('images/logos/header-logo-mobile.png') }}"
+                alt="COACHTECH">
         </a>
         <div class="header__search">
             @section('search')
@@ -25,7 +29,7 @@
                 <input type="hidden" name="tab" value="mylist">
                 @endif
                 <input class="search-form__input" type="text" name="keyword"
-                placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
+                    placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
             </form>
             @show
         </div>
@@ -42,7 +46,7 @@
                     <!-- ログインしている場合 -->
                     @auth
                     <form class="logout__button" method="post" action="{{ route('logout') }}">
-                    @csrf
+                        @csrf
                         <button class="logout__button-submit" type="submit">ログアウト</button>
                     </form>
                     @endauth
@@ -67,17 +71,18 @@
         @yield('content')
     </main>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
 
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', function () {
-                navMenu.classList.toggle('active');
-            });
-        }
-    });
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
     </script>
     @stack('scripts')
 </body>
+
 </html>

@@ -21,11 +21,20 @@ class MyPageTest extends TestCase
         $profile = Profile::factory()->create(['user_id' => $user->id]);
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
-        $item1 = Item::factory()->create(['user_id' => $user->id]);
+        $item1 = Item::factory()->create([
+            'user_id' => $user->id,
+            'name' => 'テスト商品'
+        ]);
 
         $seller = User::factory()->create();
-        $item2 = Item::factory()->create(['user_id' => $seller->id]);
-        $item3 = Item::factory()->create(['user_id' => $seller->id]);
+        $item2 = Item::factory()->create([
+            'user_id' => $seller->id,
+            'name' => 'テスト商品2'
+        ]);
+        $item3 = Item::factory()->create([
+            'user_id' => $seller->id,
+            'name' => 'テスト商品3'
+        ]);
 
         Order::factory()->create([
             'user_id' => $user->id,

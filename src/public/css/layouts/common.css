@@ -27,6 +27,10 @@ body {
     width: 70%;
 }
 
+.header__logo-image--mobile {
+    display: none;
+}
+
 .header__search {
     flex: 1;
 }
@@ -114,6 +118,18 @@ input::placeholder {
 }
 
 /* レスポンシブ対応 */
+
+@media screen and (max-width: 850px) {
+    .header__logo-image--desktop {
+        display: none;
+    }
+
+    .header__logo-image--mobile {
+        display: block;
+        width: 28%;
+        padding-left: 3%;
+    }
+}
 
 @media screen and (max-width: 950px) {
 

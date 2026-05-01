@@ -117,7 +117,6 @@
     color: #000000;
 }
 
-/* 「sold」表示の装飾（親要素） */
 .item-card__image-wrapper {
     position: relative;
     overflow: hidden;
@@ -125,7 +124,6 @@
     margin-bottom: 10px;
 }
 
-/* SOLDラベルの土台 */
 .item-card__sold {
     position: absolute;
     top: 0;
@@ -136,7 +134,6 @@
     clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-/* SOLDの文字 */
 .item-card__sold-text {
     position: absolute;
     top: 30%;
@@ -149,15 +146,130 @@
     display: block;
 }
 
-/* 売り切れ商品の画像に少しフィルターをかけると分かりやすい */
 .item-card__sold+.item-card__image {
     filter: brightness(0.8);
-    /* 少し暗くする */
 }
 
 /* レスポンシブ対応 */
 
+@media screen and (max-width: 768px) {
+
+    .mypage__content {
+        margin-top: 30px;
+    }
+
+    .profile__content {
+        display: block;
+    }
+
+    .profile__content-wrapper {
+        gap: 10%;
+        margin-bottom: 30px;
+    }
+
+    .profile__image {
+        width: 40%;
+    }
+
+    .profile__name-text {
+        font-size: 24px;
+    }
+
+    .edit-profile {
+        margin: 0 auto;
+        width: 50%;
+    }
+
+    .edit-profile__link {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .tab__item {
+        width: 35%;
+    }
+
+    .tab__item:first-child {
+        margin-left: 5%;
+    }
+
+    .tab__item-link {
+        font-size: 16px;
+    }
+
+    .items-list {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+    .item-card {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .item-card__name-text {
+        font-size: 16px;
+    }
+}
+
 @media screen and (min-width: 768px) and (max-width: 850px) {
+
+    .mypage__content {
+        margin-top: 30px;
+    }
+
+    .profile__content-wrapper {
+        gap: 10%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    .profile__image {
+        width: 35%;
+    }
+
+    .profile__name-text {
+        font-size: 24px;
+    }
+
+    .edit-profile {
+        margin: 0 auto;
+        width: 30%;
+    }
+
+    .edit-profile__link {
+        font-size: 14px;
+    }
+
+    .tabs {
+        margin-top: 0px;
+    }
+
+    .tab__item {
+        width: 26%;
+    }
+
+    .tab__item:first-child {
+        margin-left: 2%;
+    }
+
+    .items-list {
+        gap: 10%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .item-card {
+        width: 45%;
+        margin-bottom: 30px;
+    }
+
+    .item-card__name-text {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 851px) and (max-width: 1399px) {
 
     .mypage__content {
         margin-top: 30px;
@@ -184,30 +296,25 @@
     }
 
     .tab__item {
-        position: relative;
         width: 26%;
     }
 
     .tab__item:first-child {
-        margin-left: 2%;
-    }
-
-    .tab__item-link {
-        font-size: 16px;
+        margin-left: 5%;
     }
 
     .items-list {
-        gap: 2%;
-        padding-left: 6%;
+        gap: 3%;
+        padding-left: 3%;
     }
 
     .item-card {
-        width: 22%;
+        width: 30%;
         margin-bottom: 30px;
     }
 
     .item-card__name-text {
-        font-size: 16px;
+        font-size: 18px;
     }
 }
 

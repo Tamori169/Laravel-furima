@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
+use App\Models\Condition;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -18,14 +20,16 @@ class SellItemTest extends TestCase
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
         $file = UploadedFile::fake()->image('test_image.jpeg');
+        $category = Category::first();
+        $condition = Condition::first();
 
         $response = $this->actingAs($user)->get('/sell');
         $response->assertStatus(200);
 
         $response = $this->actingAs($user)->post('/sell', [
             'image' => $file,
-            'categories' => [1],
-            'condition_id' => 1,
+            'categories' => [$category->id],
+            'condition_id' => $condition->id,
             'name' => 'テスト商品',
             'brand' => 'テストブランド',
             'description' => 'テスト商品の説明',
@@ -36,14 +40,14 @@ class SellItemTest extends TestCase
 
         $this->assertDatabaseHas('items', [
             'user_id' => $user->id,
-            'condition_id' => 1,
+            'condition_id' => $condition->id,
             'name' => 'テスト商品',
             'brand' => 'テストブランド',
             'description' => 'テスト商品の説明',
             'price' => 1000,
         ]);
         $this->assertDatabaseHas('category_item', [
-            'category_id' => 1,
+            'category_id' => $category->id,
         ]);
     }
 }

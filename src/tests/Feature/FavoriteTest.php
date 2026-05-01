@@ -73,8 +73,8 @@ class FavoriteTest extends TestCase
 
         $response = $this->get("/item/{$item->id}");
         $response->assertStatus(200);
-        $response->assertSee('images/logos/ハートロゴ_ピンク.png');
-        $response->assertDontSee('images/logos/ハートロゴ_デフォルト.png');
+        $response->assertSee('images/logos/favorite-logo-pink.png');
+        $response->assertDontSee('images/logos/favorite-logo-default.png');
     }
 
     // 再度いいねアイコンを押下することによって、いいねを解除することができる。

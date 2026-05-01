@@ -2,8 +2,8 @@
 
 <!-- 新規と更新両方に対応 -->
 @php
-    $isUpdate = isset($profile->id);
-    $route = $isUpdate ? route('profile.update') : route('profile.store');
+$isUpdate = isset($profile->id);
+$route = $isUpdate ? route('profile.update') : route('profile.store');
 @endphp
 
 @section('css')
@@ -21,22 +21,22 @@
     <form class="form" action="{{ $route }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
         @if($isUpdate)
-            @method('PATCH')
+        @method('PATCH')
         @endif
         <!-- 画像アップロード -->
         <div class="form__image">
             <div class="form__image-content">
                 <div class="form__image-preview">
                     <img class="form__image--item" id="preview"
-                    src="{{ $profile && $profile->image
-                    ? asset($profile->image) : asset('images/profiles/Gray__profile-image.jpeg') }}">
+                        src="{{ $profile && $profile->image
+                    ? asset($profile->image) : asset('images/profiles/profile-image-gray.jpeg') }}">
                 </div>
                 <div class="form__image-upload">
                     <label class="form__image-file" for="image-upload">
                         画像を選択する
                     </label>
                     <input id="image-upload" type="file" name="image"
-                    onchange="previewImage(this)">
+                        onchange="previewImage(this)">
                 </div>
             </div>
             <div class="form__error-first">
@@ -57,7 +57,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="name"
-                    value="{{ old('name', $user->name) }}" >
+                        value="{{ old('name', $user->name) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -78,7 +78,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="postal_code"
-                    value="{{ old('postal_code', $profile->postal_code) }}">
+                        value="{{ old('postal_code', $profile->postal_code) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -99,7 +99,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="address"
-                    value="{{ old('address', $profile->address) }}">
+                        value="{{ old('address', $profile->address) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -120,7 +120,7 @@
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="building"
-                    value="{{ old('building', $profile->building) }}">
+                        value="{{ old('building', $profile->building) }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">

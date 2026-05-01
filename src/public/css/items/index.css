@@ -59,7 +59,6 @@
     margin-top: 50px;
     margin-bottom: 100px;
     padding-left: 4%;
-    padding-right: 4%;
 }
 
 .item-card {
@@ -87,7 +86,6 @@
     color: #000000;
 }
 
-/* 「sold」表示の装飾（親要素） */
 .item-card__image-wrapper {
     position: relative;
     overflow: hidden;
@@ -95,7 +93,6 @@
     margin-bottom: 10px;
 }
 
-/* SOLDラベルの土台 */
 .item-card__sold {
     position: absolute;
     top: 0;
@@ -106,7 +103,6 @@
     clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-/* SOLDの文字 */
 .item-card__sold-text {
     position: absolute;
     top: 30%;
@@ -119,7 +115,6 @@
     display: block;
 }
 
-/* 売り切れ商品の画像に少しフィルターをかけると分かりやすい */
 .item-card__sold+.item-card__image {
     filter: brightness(0.8);
 }
@@ -129,7 +124,6 @@
 @media screen and (max-width: 768px) {
 
     .tab__item {
-        position: relative;
         width: 25%;
     }
 
@@ -159,7 +153,6 @@
 @media screen and (min-width: 768px) and (max-width: 850px) {
 
     .tab__item {
-        position: relative;
         width: 15%;
     }
 
@@ -167,18 +160,14 @@
         margin-left: 20%;
     }
 
-    .tab__item-link {
-        font-size: 16px;
-    }
-
     .items-list {
         gap: 10%;
-        padding-left: 6%;
-        padding-right: 6%;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     .item-card {
-        width: 40%;
+        width: 45%;
         margin-bottom: 30px;
     }
 
@@ -189,18 +178,17 @@
 
 @media screen and (min-width: 851px) and (max-width: 1399px) {
 
-    .tab__item:first-child {
-        margin-left: 20%;
+    .tab__item {
+        width: 15%;
     }
 
-    .tab__item-link {
-        font-size: 18px;
+    .tab__item:first-child {
+        margin-left: 20%;
     }
 
     .items-list {
         gap: 3%;
         padding-left: 3%;
-        padding-right: 3%;
     }
 
     .item-card {

@@ -11,7 +11,7 @@
         <!-- 商品画像 -->
         <div class="item-detail__image-wrapper">
             <img class="item-detail__image" src="{{ asset($item->image) }}"
-            alt="{{ $item->name }}">
+                alt="{{ $item->name }}">
         </div>
         <div class="item-detail__info-wrapper">
             <!-- 商品名 -->
@@ -38,20 +38,20 @@
             <div class="item-detail__actions">
                 <div class="action__favorite">
                     @if(Auth::check() && $item->favorites->contains(Auth::id()))
-                        <form action="{{ route('favorite.destroy', $item->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="background: none; border: none;">
-                                <img class="action__favorite-icon" src="{{ asset('images/logos/ハートロゴ_ピンク.png') }}" alt="いいね解除">
-                            </button>
-                        </form>
+                    <form action="{{ route('favorite.destroy', $item->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="background: none; border: none;">
+                            <img class="action__favorite-icon" src="{{ asset('images/logos/favorite-logo-pink.png') }}" alt="いいね解除">
+                        </button>
+                    </form>
                     @else
-                        <form action="{{ route('favorite.store', $item->id) }}" method="post">
-                            @csrf
-                            <button type="submit" style="background: none; border: none;">
-                                <img class="action__favorite-icon" src="{{ asset('images/logos/ハートロゴ_デフォルト.png') }}" alt="いいね追加">
-                            </button>
-                        </form>
+                    <form action="{{ route('favorite.store', $item->id) }}" method="post">
+                        @csrf
+                        <button type="submit" style="background: none; border: none;">
+                            <img class="action__favorite-icon" src="{{ asset('images/logos/favorite-logo-default.png') }}" alt="いいね追加">
+                        </button>
+                    </form>
                     @endif
                     <p class="action__favorites-count">
                         {{ $item->favorites_count ?? 0 }}
@@ -59,7 +59,7 @@
                 </div>
                 <div class="action__comment">
                     <img class="action__comment-icon"
-                    src="{{ asset('images/logos/ふきだしロゴ.png')}}" alt="コメント" >
+                        src="{{ asset('images/logos/comment-logo.png')}}" alt="コメント">
                     <p class="action__comments-count">
                         {{ $item->comments_count ?? 0 }}
                     </p>
@@ -104,9 +104,9 @@
                     </p>
                     <div class="item-detail__categories-wrapper">
                         @foreach($item->categories as $category)
-                            <p class="item-detail__categories-content">
-                                {{ $category->name }}
-                            </p>
+                        <p class="item-detail__categories-content">
+                            {{ $category->name }}
+                        </p>
                         @endforeach
                     </div>
                 </div>
