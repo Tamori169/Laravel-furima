@@ -8,12 +8,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CommentTest extends TestCase
+class T_09_CommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    // ログイン済みのユーザーはコメントを送信できる
-    public function test_logged_in_user_can_post_comment()
+    public function test_ログイン済みのユーザーはコメントを送信できる()
     {
         $user = User::factory()->create();
         $profile = Profile::factory()->create(['user_id' => $user->id]);
@@ -50,8 +49,7 @@ class CommentTest extends TestCase
         ]);
     }
 
-    // ログイン前のユーザーはコメントを送信できない
-    public function test_guest_user_cannot_post_comment()
+    public function test_ログイン前のユーザーはコメントを送信できない()
     {
         $user = User::factory()->create();
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
@@ -69,8 +67,7 @@ class CommentTest extends TestCase
         ]);
     }
 
-    // コメントが入力されていない場合、バリデーションメッセージが表示される
-    public function test_comment_is_required()
+    public function test_コメントが入力されていない場合、バリデーションメッセージが表示される()
     {
         $user = User::factory()->create();
         $profile = Profile::factory()->create(['user_id' => $user->id]);
@@ -93,8 +90,7 @@ class CommentTest extends TestCase
         $response->assertSessionHasErrors(['comment' => 'コメントを入力してください']);
     }
 
-    // コメントが255字以上の場合、バリデーションメッセージが表示される
-    public function test_comment_cannot_be_more_than_255_characters()
+    public function test_コメントが255字以上の場合、バリデーションメッセージが表示される()
     {
         $user = User::factory()->create();
         $profile = Profile::factory()->create(['user_id' => $user->id]);

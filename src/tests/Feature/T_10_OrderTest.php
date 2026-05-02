@@ -11,12 +11,11 @@ use Mockery;
 use Stripe\Checkout\Session;
 use Tests\TestCase;
 
-class OrderTest extends TestCase
+class T_10_OrderTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 【カード支払い】「購入する」ボタンを押下すると購入が完了する
-    public function test_user_can_buy_an_item_with_credit_card()
+    public function test_「購入する」ボタンを押下すると購入が完了する_カード支払い()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -46,8 +45,7 @@ class OrderTest extends TestCase
         $response->assertRedirect('https://checkout.stripe.com/test-url');
     }
 
-    // 【コンビニ払い】「購入する」ボタンを押下すると購入が完了する
-    public function test_user_can_buy_an_item_with_convenience_payment()
+    public function test_「購入する」ボタンを押下すると購入が完了する_コンビニ払い()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -79,7 +77,7 @@ class OrderTest extends TestCase
 
     // 購入した商品は商品一覧画面にて「sold」と表示される
 
-    public function test_sold_items_show_sold_label()
+    public function test_購入した商品は商品一覧画面にて「sold」と表示される()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -98,9 +96,8 @@ class OrderTest extends TestCase
         $response->assertSee('Sold');
     }
 
-    // 「プロフィール/購入した商品一覧」に追加されている
 
-    public function test_user_can_view_their_purchased_items()
+    public function test_プロフィールの購入した商品一覧に追加されている()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

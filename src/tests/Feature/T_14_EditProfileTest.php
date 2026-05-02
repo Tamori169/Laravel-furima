@@ -7,12 +7,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class EditProfileTest extends TestCase
+class T_14_EditProfileTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 変更項目が初期値として過去設定されていること（プロフィール画像、ユーザー名、郵便番号、住所）
-    public function test_user_sees_default_values()
+    public function test_変更項目が初期値として過去設定されていること()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create([

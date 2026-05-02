@@ -7,12 +7,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ItemSearchTest extends TestCase
+class T_06_SearchItemTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 「商品名」で部分一致検索ができる
-    public function test_search_by_item_name()
+    public function test_「商品名」で部分一致検索ができる()
     {
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
@@ -26,8 +25,7 @@ class ItemSearchTest extends TestCase
         $response->assertDontSee($item2->name);
     }
 
-    // 検索状態がマイリストでも保持されている
-    public function test_search_by_item_name_in_mylist()
+    public function test_検索状態がマイリストでも保持されている()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

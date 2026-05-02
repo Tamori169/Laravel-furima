@@ -8,12 +8,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ItemIndexTest extends TestCase
+class T_04_ItemIndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 全商品を取得できる
-    public function test_item_index_page_loads_correctly()
+    public function test_全商品を取得できる()
     {
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
@@ -28,8 +27,7 @@ class ItemIndexTest extends TestCase
         }
     }
 
-    // 購入済み商品は「Sold」と表示される
-    public function test_sold_items_show_sold_label()
+    public function test_購入済み商品はSoldと表示される()
     {
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
@@ -43,8 +41,7 @@ class ItemIndexTest extends TestCase
         $response->assertSee('Sold');
     }
 
-    // 自分が出品した商品は表示されない
-    public function test_own_items_not_shown()
+    public function test_自分が出品した商品は表示されない()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

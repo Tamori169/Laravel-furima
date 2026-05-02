@@ -9,11 +9,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
-class SellItemTest extends TestCase
+class T_15_SellItemTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_example()
+    public function test_商品出品画面にて必要な情報が保存できること()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

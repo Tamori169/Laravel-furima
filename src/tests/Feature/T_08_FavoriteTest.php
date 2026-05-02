@@ -7,12 +7,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class FavoriteTest extends TestCase
+class T_08_FavoriteTest extends TestCase
 {
     use RefreshDatabase;
 
-    // いいねアイコンを押下することによって、いいねした商品として登録することができる。
-    public function test_user_can_favorite_an_item()
+    public function test_いいねアイコンを押下することによっていいねした商品として登録することができる()
     {
         $user = User::factory()->create();
         $seller = User::factory()->create();
@@ -48,8 +47,7 @@ class FavoriteTest extends TestCase
         ]);
     }
 
-    // 追加済みのアイコンは色が変化する
-    public function test_user_sees_favorite_icon_when_item_is_favorited()
+    public function test_追加済みのアイコンは色が変化する()
     {
         $user = User::factory()->create();
         $seller = User::factory()->create();
@@ -77,8 +75,7 @@ class FavoriteTest extends TestCase
         $response->assertDontSee('images/logos/favorite-logo-default.png');
     }
 
-    // 再度いいねアイコンを押下することによって、いいねを解除することができる。
-    public function test_user_can_unfavorite_an_item()
+    public function test_再度いいねアイコンを押下することによって、いいねを解除することができる()
     {
         $user = User::factory()->create();
         $seller = User::factory()->create();
@@ -95,7 +92,7 @@ class FavoriteTest extends TestCase
         $this->assertAuthenticatedAs($user);
 
         $response = $this->get("/item/{$item->id}");
-
+        $response->assertStatus(200);
         $response = $this->post("/item/{$item->id}/favorite");
 
         $response = $this->get("/item/{$item->id}");

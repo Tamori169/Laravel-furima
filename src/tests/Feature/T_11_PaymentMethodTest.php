@@ -8,12 +8,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PaymentMethodTest extends TestCase
+class T_11_PaymentMethodTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 小計画面で変更が反映される
-    public function test_payment_method_display_reflects_selection()
+    public function test_小計画面で変更が反映される()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

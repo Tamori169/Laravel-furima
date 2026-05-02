@@ -10,12 +10,11 @@ use Mockery;
 use Stripe\Checkout\Session;
 use Tests\TestCase;
 
-class EditAddressTest extends TestCase
+class T_12_EditAddressTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 送付先住所変更画面にて登録した住所が商品購入画面に反映されている
-    public function test_user_can_see_edited_address_is_reflected_in_purchase_screen()
+    public function test_送付先住所変更画面にて登録した住所が商品購入画面に反映されている()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -56,8 +55,7 @@ class EditAddressTest extends TestCase
         $response->assertSee('梅田ビル202');
     }
 
-    // 購入した商品に送付先住所が紐づいて登録される
-    public function test_edited_address_is_reflected_in_order()
+    public function test_購入した商品に送付先住所が紐づいて登録される()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -108,9 +106,8 @@ class EditAddressTest extends TestCase
         $response->assertRedirect('https://checkout.stripe.com/test-url');
     }
 
-    // 購入した商品に送付先住所が紐づいて登録される
-    // ※stripe実装のためコメントアウト
-    // public function test_edited_address_is_reflected_in_order()
+    // ※stripe実装のため一つ上のテストに変更しコメントアウト
+    // public function test_購入した商品に送付先住所が紐づいて登録される()
     // {
     //     /** @var \App\Models\User $user */
     //     $user = User::factory()->create();

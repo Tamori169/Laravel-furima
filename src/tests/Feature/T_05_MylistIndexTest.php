@@ -8,12 +8,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class MylistIndexTest extends TestCase
+class T_05_MylistIndexTest extends TestCase
 {
     use RefreshDatabase;
 
-    // いいねした商品だけが表示される
-    public function test_only_favorited_items_shown()
+    public function test_いいねした商品だけが表示される()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -33,8 +32,7 @@ class MylistIndexTest extends TestCase
         $response->assertDontSee($item2->name);
     }
 
-    // 購入済み商品は「Sold」と表示される
-    public function test_sold_items_show_sold_label()
+    public function test_購入済み商品はSoldと表示される()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -54,8 +52,7 @@ class MylistIndexTest extends TestCase
         $response->assertSee('Sold');
     }
 
-    // 未認証の場合は何も表示されない
-    public function test_no_items_shown_for_guests()
+    public function test_未認証の場合は何も表示されない()
     {
         $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
         $this->seed(\Database\Seeders\CategoriesTableSeeder::class);

@@ -8,13 +8,12 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ItemShowTest extends TestCase
+class T_07_ItemShowTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 必要な情報が表示される（商品画像、商品名、ブランド名、価格、いいね数、コメント数、商品説明、商品情報（カテゴリ、商品の状態）、コメント数、コメントしたユーザー情報、コメント内容）
     // ※いいねはFavoriteTestにてテストするため、0件とする
-    public function test_item_show_displays_all_information()
+    public function test_必要な情報が表示される()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
@@ -55,8 +54,7 @@ class ItemShowTest extends TestCase
         $response->assertSee('テストコメント');
     }
 
-    // 複数選択されたカテゴリが表示されているか
-    public function test_item_show_displays_all_categories()
+    public function test_複数選択されたカテゴリが表示されているか()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

@@ -9,12 +9,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class MyPageTest extends TestCase
+class T_13_MyPageTest extends TestCase
 {
     use RefreshDatabase;
 
-    // 必要な情報が取得できる（プロフィール画像、ユーザー名、出品した商品一覧、購入した商品一覧）
-    public function test_gets_required_information()
+    public function test_必要な情報が取得できる()
     {
         /** @var \App\Models\User $user */
         $user = User::factory()->create();

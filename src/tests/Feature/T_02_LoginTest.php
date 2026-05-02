@@ -6,12 +6,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class LoginTest extends TestCase
+class T_02_LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    // メールアドレスが入力されていない場合、バリデーションメッセージが表示される
-    public function test_email_is_required()
+    public function test_メールアドレスが入力されていない場合、バリデーションメッセージが表示される()
     {
         $password = 'password';
         $user = User::factory()->create([
@@ -30,8 +29,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email' => 'メールアドレスを入力してください']);
     }
 
-    // パスワードが入力されていない場合、バリデーションメッセージが表示される
-    public function test_password_is_required()
+    public function test_パスワードが入力されていない場合、バリデーションメッセージが表示される()
     {
         $user = User::factory()->create();
 
@@ -47,8 +45,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['password' => 'パスワードを入力してください']);
     }
 
-    // 【メールアドレス編】入力情報が間違っている場合、バリデーションメッセージが表示される
-    public function test_invalid_email_show_validation_error()
+    public function test_入力情報が間違っている場合、バリデーションメッセージが表示される_メールアドレス()
     {
         $email = 'test@example.com';
         $password = 'password';
@@ -69,8 +66,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
     }
 
-    // 【パスワード編】入力情報が間違っている場合、バリデーションメッセージが表示される
-    public function test_invalid_password_show_validation_error()
+    public function test_入力情報が間違っている場合、バリデーションメッセージが表示される_パスワード()
     {
         $email = 'test@example.com';
         $password = 'password';
@@ -91,8 +87,7 @@ class LoginTest extends TestCase
         $response->assertSessionHasErrors(['email' => 'ログイン情報が登録されていません']);
     }
 
-    // 正しい情報が入力された場合、ログイン処理が実行される
-    public function test_user_can_login_with_valid_credentials()
+    public function test_正しい情報が入力された場合、ログイン処理が実行される()
     {
         $user = User::factory()->create();
 
