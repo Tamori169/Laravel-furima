@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             'name' => '田中太郎',
             'email' => 'tanaka@example.com',
             'password' => Hash::make('tanakatanaka'),
-            'email_verified_at' => null,
+            'email_verified_at' => now(),
         ]);
 
         User::create([
@@ -34,14 +34,7 @@ class UsersTableSeeder extends Seeder
             'name' => '鈴木三郎',
             'email' => 'suzuki@example.com',
             'password' => Hash::make('suzukisuzuki'),
-            'email_verified_at' => null,
-        ]);
-
-        User::create([
-            'name' => '山田花子',
-            'email' => 'yamada@example.com',
-            'password' => Hash::make('yamadayamada'),
-            'email_verified_at' => null,
+            'email_verified_at' => now(),
         ]);
     }
 }
