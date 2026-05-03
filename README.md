@@ -179,6 +179,68 @@ STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxx
 ```
 docker-compose exec php bash
 stripe login
+stripe listen --forward-to http://nginx/stripe/webhook
+```
+
+## 機能テスト実行手順
+
+`config/database.php` にはテスト用DB接続設定を記述済みです。  
+以下の手順でテスト用DBと環境ファイルを作成後、テストを実行してください。
+
+### 1. MySQLにログイン
+
+```
+cd Laravel-furima
+docker-compose exec mysql bash
+```
+
+### 2. rootにアクセス
+
+```
+mysql -u root -p
+パスワードは `root` を入力してください。
+```
+
+### 3. テスト用DBを作成
+
+```
+CREATE DATABASE laravel_furima_test;
+exit
+```
+
+### 4. .env.testingを作成
+
+```
+docker-compose exec php bash
+cp .env .env.testing
+```
+
+### 5. 環境変数設定
+
+``` .env.testing
+APP_ENV=testing
+DB_DATABASE=laravel_furima_test
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+### 6. 各種データをクリア
+
+```
+php artisan config:clear
+php artisan cache:clear
+```
+
+### 7. データベースマイグレーション
+
+```
+php artisan migrate --env=testing
+```
+
+### 8. テスト実行
+
+```
+php artisan test
 ```
 
 ## テストユーザー
@@ -190,7 +252,7 @@ stripe login
 また、各ユーザーに応じた想定用途も記載しているので、それぞれ動作確認に活用してください。
 
 
-テストユーザ１：メール認証済み・プロフィール設定済み
+テストユーザ1：メール認証済み・プロフィール設定済み
 - ユーザ名：田中太郎
 - メールアドレス：tanaka@example.com
 - パスワード：tanakatanaka
@@ -214,13 +276,13 @@ stripe login
 - パスワード：suzukisuzuki
 - 出品した商品：ショルダーバッグ・タンブラー・コーヒーミル・メイクセット
 - 郵便番号・住所・建物名：登録なし
-- 想定用途：購入画面での発送先み入力によるバリデーションのほか、途中離脱による想定外動作の確認等
+- 想定用途：購入画面での発送先入力によるバリデーションのほか、途中離脱による想定外動作の確認等
 
 ### 2. （参考）プロフィール設定用サンプルデータ
 
-ユーザーNO| 郵便番号 | 住所 | 建物名 | プロフィール画像 |
+|ユーザーNO| 郵便番号 | 住所 | 建物名 | プロフィール画像 |
 |---|---|---|---|---|
 | テストユーザー2 | 530-0011 | 大阪府大阪市北区大深町 | グランフロント大阪 北館 7F | `public/images/profiles/sato_profile_image.jpeg` |
 | テストユーザー3 | 460-0008 | 愛知県名古屋市中区栄三丁目 15番21号 | スカイプラザ栄 402号室 | `public/images/profiles/suzuki_profile_image.jpeg` |
 
-なお、プロフィール画像を設定する場合は、Gitクローン後のプロジェクト内にある上記パスの画像ファイルをアップロードすること。
+なお、プロフィール画像を設定する場合は、Gitクローン後のプロジェクト内にある上記パスの画像ファイルをアップロードしてください。
