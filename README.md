@@ -24,7 +24,7 @@ Coachtechフリマ
 ### 1. リポジトリをクローン
 
 ```
-git clone https://github.com/Tamori169/Laravel-furima.git  
+git clone https://github.com/Tamori169/Laravel-furima.git
 cd Laravel-furima
 ```
 
@@ -83,6 +83,7 @@ php artisan storage:link
 ### "The stream or file could not be opened"エラーが発生した場合
 
 srcディレクトリにあるstorageディレクトリに権限を設定
+
 ```
 chmod -R 777 storage
 ```
@@ -107,17 +108,19 @@ chmod -R 777 storage
 
 ## ER図
 
-![ER図](ER.drawio.png)  
+![ER図](ER.drawio.png)
 
 ## URL一覧
 
 ### 1. 認証不要でアクセス可能なページ一覧
+
 - 商品一覧画面(トップ画面)：`http://localhost/`
 - 商品詳細画面：`http://localhost/item/{item_id}`
 - 会員登録画面：`http://localhost/register`
 - ログイン画面：`http://localhost/login`
 
 ### 2. 認証後にアクセス可能なページ一覧
+
 - メール認証誘導画面： `http://localhost/email/verify`
 - プロフィール設定画面： `http://localhost/setup-profile`
 - 商品購入画面： `http://localhost/purchase/{item_id}`
@@ -127,13 +130,13 @@ chmod -R 777 storage
 - 商品出品画面： `http://localhost/sell`
 
 ### 3. DB管理画面
-- phpMyAdmin：`http://localhost:8080`
 
+- phpMyAdmin：`http://localhost:8080`
 
 ## MailHog設定
 
-本アプリではメール認証機能の確認に MailHog を使用。  
-Docker起動後、MailHog は `http://localhost:8025` で確認が可能。
+本アプリではメール認証機能の確認に MailHog を使用しています。  
+Docker起動後、MailHog は `http://localhost:8025` で確認が可能です。
 
 `.env` への設定内容は下記の通りです。
 
@@ -147,7 +150,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ## Stripe設定
 
-本アプリでは Stripe を利用した決済機能を実装しています。  
+本アプリでは Stripe を利用した決済機能を実装しています。
 
 ### 1. セットアップ手順
 
@@ -156,16 +159,22 @@ MAIL_FROM_NAME="${APP_NAME}"
 1. Stripeにログイン（アカウントがない場合は作成要）
 2. テストモードを有効化
 3. APIキー一覧から以下を確認
+
 - 公開可能キー
 - シークレットキー
+
 4. Stripe CLI を使用してWebhook署名を取得
-- 下記コマンドを実行(実行後に表示される whsec_... を控える)
+
+- 下記コマンドを実行(実行後に表示される whsec\_... を控える)
+
 ```bash
 docker-compose exec php bash
 stripe login
 stripe listen --forward-to http://nginx/stripe/webhook
 ```
+
 5. `.env` に設定
+
 ```env
 STRIPE_KEY=your_stripe_publishable_key
 STRIPE_SECRET=your_stripe_secret_key
@@ -217,7 +226,7 @@ cp .env .env.testing
 
 ### 5. 環境変数設定
 
-``` .env.testing
+```.env.testing
 APP_ENV=testing
 DB_DATABASE=laravel_furima_test
 DB_USERNAME=root
@@ -251,8 +260,8 @@ php artisan test
 各ユーザーの認証状況およびプロフィール設定状況、出品商品情報は下記の通りです。  
 また、各ユーザーに応じた想定用途も記載しているので、それぞれ動作確認に活用してください。
 
+テストユーザー1：メール認証済み・プロフィール設定済み
 
-テストユーザ1：メール認証済み・プロフィール設定済み
 - ユーザ名：田中太郎
 - メールアドレス：tanaka@example.com
 - パスワード：tanakatanaka
@@ -260,29 +269,31 @@ php artisan test
 - 郵便番号：100-0005
 - 住所：東京都千代田区丸の内一丁目
 - 建物名：丸の内オアゾ 15F
-- 想定用途：ログイン後の各機能動作確認用を想定
+- 想定用途：ログイン後の各機能動作確認
 
-テストユーザ2：メール認証未済・プロフィール設定未済
+テストユーザー2：メール認証未済・プロフィール設定未済
+
 - ユーザ名：佐藤次郎
 - メールアドレス：sato@example.com
 - パスワード：satosato
 - 出品した商品：革靴・ノートPC・マイク
 - 郵便番号・住所・建物名：登録なし
-- 想定用途：初回ログイン時のメール認証からプロフィール設定までの導線確認用を想定（メール認証誘導画面では、認証メール再送信が必要）
+- 想定用途：初回ログイン時のメール認証からプロフィール設定までの導線確認（メール認証誘導画面では、認証メール再送信が必要です）
 
 テストユーザ3：メール認証済・プロフィール設定未済
+
 - ユーザ名：鈴木三郎
 - メールアドレス：suzuki@example.com
 - パスワード：suzukisuzuki
 - 出品した商品：ショルダーバッグ・タンブラー・コーヒーミル・メイクセット
 - 郵便番号・住所・建物名：登録なし
-- 想定用途：購入画面での発送先入力によるバリデーションのほか、途中離脱による想定外動作の確認等
+- 想定用途：購入画面での発送先入力によるバリデーションのほか、途中離脱による想定外動作の確認
 
 ### 2. （参考）プロフィール設定用サンプルデータ
 
-|ユーザーNO| 郵便番号 | 住所 | 建物名 | プロフィール画像 |
-|---|---|---|---|---|
-| テストユーザー2 | 530-0011 | 大阪府大阪市北区大深町 | グランフロント大阪 北館 7F | `public/images/profiles/sato_profile_image.jpeg` |
-| テストユーザー3 | 460-0008 | 愛知県名古屋市中区栄三丁目 15番21号 | スカイプラザ栄 402号室 | `public/images/profiles/suzuki_profile_image.jpeg` |
+| ユーザーNO      | 郵便番号 | 住所                                | 建物名                     | プロフィール画像                                   |
+| --------------- | -------- | ----------------------------------- | -------------------------- | -------------------------------------------------- |
+| テストユーザー2 | 530-0011 | 大阪府大阪市北区大深町              | グランフロント大阪 北館 7F | `public/images/profiles/sato_profile_image.jpeg`   |
+| テストユーザー3 | 460-0008 | 愛知県名古屋市中区栄三丁目 15番21号 | スカイプラザ栄 402号室     | `public/images/profiles/suzuki_profile_image.jpeg` |
 
 なお、プロフィール画像を設定する場合は、Gitクローン後のプロジェクト内にある上記パスの画像ファイルをアップロードしてください。
