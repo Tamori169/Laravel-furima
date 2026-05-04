@@ -108,13 +108,13 @@
     font-size: 16px;
 }
 
-.update__form {
+.shipping-address__edit {
     margin-top: 20px;
     width: 35%;
     text-align: right;
 }
 
-.update__form-link {
+.shipping-address__edit-link {
     text-decoration: none;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .purchase__button-submit,
-.sold__button {
+.purchase__button--sold {
     width: 100%;
     color: #fff;
     border-radius: 3px;
@@ -163,7 +163,7 @@
     background-color: #cc0000;
 }
 
-.sold__button {
+.purchase__button--sold {
     background-color: #444;
 }
 
@@ -243,7 +243,7 @@
         margin: 0 auto;
     }
 
-    .update__form {
+    .shipping-address__edit {
         width: 100%;
         text-align: center;
     }

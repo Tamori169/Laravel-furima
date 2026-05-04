@@ -65,13 +65,13 @@
                     <div class="form__shipping-address--content-first">
                         <span class="form__shipping-address--character">〒</span>
                         <input class="form__shipping-address--postal-code" type="text" name="postal_code"
-                        value="{{ $address->postal_code ?? ''}}" readonly>
+                            value="{{ $address->postal_code ?? ''}}" readonly>
                     </div>
                     <div class="form__shipping-address--content-second">
                         <input class="form__shipping-address--address" type="text" name="address"
-                        value="{{ $address->address ?? ''}}" readonly>
+                            value="{{ $address->address ?? ''}}" readonly>
                         <input class="form__shipping-address--building" type="text" name="building"
-                        value="{{ $address->building ?? ''}}" readonly>
+                            value="{{ $address->building ?? ''}}" readonly>
                     </div>
                     <div class="form__error">
                         <span class="form__error-text">
@@ -89,8 +89,8 @@
                     </div>
                 </div>
                 <!-- 配送先変更 -->
-                <div class="update__form">
-                    <a class="update__form-link" href="{{ route('order.edit', $item->id) }}">
+                <div class="shipping-address__edit">
+                    <a class="shipping-address__edit-link" href="{{ route('order.edit', $item->id) }}">
                         変更する
                     </a>
                 </div>
@@ -119,7 +119,7 @@
             <!-- 購入ボタン -->
             <div class="purchase__button">
                 @if($isSold)
-                <button class="sold__button" disabled>
+                <button class="purchase__button--sold" disabled>
                     売り切れ
                 </button>
                 @else

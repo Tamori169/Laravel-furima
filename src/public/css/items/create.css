@@ -47,7 +47,7 @@
     object-fit: contain;
 }
 
-#image-upload {
+.form__image-input {
     display: none;
 }
 
@@ -115,7 +115,7 @@
     gap: 20px;
 }
 
-.form__content-items {
+.form__content-item {
     font-size: 14px;
     padding: 3px 10px;
     display: inline-block;
@@ -125,7 +125,7 @@
     cursor: pointer;
 }
 
-.form__content-items:hover {
+.form__content-item:hover {
     color: #cc0000;
     border: 1px solid #cc0000;
     border-radius: 20px;
@@ -216,7 +216,7 @@
 }
 
 [hidden] {
-    display: none !important;
+    display: none;
 }
 
 /* レスポンシブ対応 */

@@ -27,7 +27,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
         <div class="form__image">
             <div class="form__image-content">
                 <div class="form__image-preview">
-                    <img class="form__image--item" id="preview"
+                    <img class="form__image-item js-preview"
                         src="{{ $profile && $profile->image
                     ? asset($profile->image) : asset('images/profiles/profile-image-gray.jpeg') }}">
                 </div>
@@ -35,7 +35,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
                     <label class="form__image-file" for="image-upload">
                         画像を選択する
                     </label>
-                    <input id="image-upload" type="file" name="image"
+                    <input id="image-upload" class="form__image-input" type="file" name="image"
                         onchange="previewImage(this)">
                 </div>
             </div>
@@ -50,7 +50,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
         <!-- ユーザー名 -->
         <div class="form__group">
             <div class="form__group-title">
-                <span class="form__label--item">
+                <span class="form__label">
                     ユーザー名
                 </span>
             </div>
@@ -71,7 +71,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
         <!-- 郵便番号 -->
         <div class="form__group">
             <div class="form__group-title">
-                <span class="form__label--item">
+                <span class="form__label">
                     郵便番号
                 </span>
             </div>
@@ -92,7 +92,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
         <!-- 住所 -->
         <div class="form__group">
             <div class="form__group-title">
-                <span class="form__label--item">
+                <span class="form__label">
                     住所
                 </span>
             </div>
@@ -113,7 +113,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
         <!-- 建物名 -->
         <div class="form__group">
             <div class="form__group-title">
-                <span class="form__label--item">
+                <span class="form__label">
                     建物名
                 </span>
             </div>
@@ -143,15 +143,17 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
 
 @push('scripts')
 <script>
-    function previewImage(obj) {
+    function previewImage(input) {
         const fileReader = new FileReader();
+        const formImage = input.closest('.form__image-content');
+        const preview = formImage.querySelector('.js-preview');
 
         fileReader.onload = function() {
-            document.getElementById('preview').src = fileReader.result;
+            preview.src = fileReader.result;
         };
 
-        if (obj.files && obj.files[0]) {
-            fileReader.readAsDataURL(obj.files[0]);
+        if (input.files && input.files[0]) {
+            fileReader.readAsDataURL(input.files[0]);
         }
     }
 </script>

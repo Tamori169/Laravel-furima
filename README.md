@@ -233,7 +233,7 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
-### 6. 各種データをクリア
+### 6. 設定キャッシュをクリア
 
 ```
 php artisan config:clear

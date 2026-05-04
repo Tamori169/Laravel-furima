@@ -16,13 +16,13 @@
     <!-- タブ -->
     <div class="tabs">
         <div class="tab__item">
-            <a class="tab__item-link {{ request('tab') != 'mylist' ? 'is-active' : '' }}"
+            <a class="tab__link {{ request('tab') != 'mylist' ? 'is-active' : '' }}"
             href="{{ route('item.index', ['keyword' => request('keyword')]) }}">
                 おすすめ
             </a>
         </div>
         <div class="tab__item">
-            <a class="tab__item-link {{ request('tab') == 'mylist' ? 'is-active' : '' }}"
+            <a class="tab__link {{ request('tab') == 'mylist' ? 'is-active' : '' }}"
             href="{{ route('item.index', ['tab' => 'mylist','keyword' => request('keyword')]) }}">
                 マイリスト
             </a>

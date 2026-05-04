@@ -22,19 +22,19 @@
                 </p>
             </div>
             <div class="form__image-content">
-                <img id="preview" class="form__image-preview" src="" alt="preview" hidden>
-                <div class="form__image-upload" id="upload-area">
+                <img class="form__image-preview js-preview" src="" alt="preview" hidden>
+                <div class="form__image-upload js-upload-area">
                     <label class="form__image-file" for="image-upload">
                         画像を選択する
                     </label>
                 </div>
-                <div class="form__image-overlay" id="overlay" hidden>
+                <div class="form__image-overlay js-overlay" hidden>
                     <label for="image-upload" class="form__image-change">
                         変更
                     </label>
                 </div>
-                <input id="image-upload" type="file" name="image"
-                onchange="previewImage(this)">
+                <input id="image-upload" class="form__image-input" type="file" name="image"
+                    onchange="previewImage(this)">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -58,13 +58,13 @@
             </div>
             <div class="form__categories-content">
                 @foreach ($categories as $category)
-                    <label class="form__category-label">
-                        <input class="form__content-checkbox" type="checkbox" name="categories[]"
+                <label class="form__category-label">
+                    <input class="form__content-checkbox" type="checkbox" name="categories[]"
                         value="{{ $category->id }}" {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
-                        <span class="form__content-items">
-                            {{ $category->name }}
-                        </span>
-                    </label>
+                    <span class="form__content-item">
+                        {{ $category->name }}
+                    </span>
+                </label>
                 @endforeach
             </div>
             <div class="form__error">
@@ -88,10 +88,10 @@
                         選択してください
                     </option>
                     @foreach ($conditions as $condition)
-                        <option value="{{ $condition->id }}"
+                    <option value="{{ $condition->id }}"
                         {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
-                            {{ $condition->name }}
-                        </option>
+                        {{ $condition->name }}
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="form__content">
                 <input class="form__content-input" type="text" name="name"
-                value="{{ old('name') }}">
+                    value="{{ old('name') }}">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -136,7 +136,7 @@
             </div>
             <div class="form__content">
                 <input class="form__content-input" type="text" name="brand"
-                value="{{ old('brand') }}">
+                    value="{{ old('brand') }}">
             </div>
         </div>
         <!-- 商品の説明 -->
@@ -167,7 +167,7 @@
             <div class="form__price">
                 <span class="yen-mark">¥</span>
                 <input class="form__price-input" type="text" name="price"
-                value="{{ old('price') }}">
+                    value="{{ old('price') }}">
             </div>
             <div class="form__error">
                 <span class="form__error-text">
@@ -185,29 +185,29 @@
         </div>
     </form>
 </div>
-
-<script>
-function previewImage(input) {
-    const file = input.files[0];
-    const preview = document.getElementById('preview');
-    const overlay = document.getElementById('overlay');
-    const uploadArea = document.getElementById('upload-area');
-
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.hidden = false;
-            overlay.hidden = false;
-
-            // ▼変更：初期UIを消す
-            uploadArea.style.display = 'none';
-        }
-
-        reader.readAsDataURL(file);
-    }
-}
-</script>
-
 @endsection
+
+@push('scripts')
+<script>
+    function previewImage(input) {
+        const file = input.files[0];
+        const imageContent = input.closest('.form__image-content');
+        const preview = imageContent.querySelector('.js-preview');
+        const overlay = imageContent.querySelector('.js-overlay');
+        const uploadArea = imageContent.querySelector('.js-upload-area');
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.hidden = false;
+                overlay.hidden = false;
+                uploadArea.style.display = 'none';
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+@endpush

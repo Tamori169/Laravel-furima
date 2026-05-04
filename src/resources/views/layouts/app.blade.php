@@ -35,12 +35,12 @@
         </div>
         @section('nav')
         <nav class="header__nav">
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger js-hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="nav-menu" id="nav-menu">
+            <div class="nav-menu js-nav-menu">
                 <!-- ログイン/ログアウト -->
                 <div class="header__nav-items">
                     <!-- ログインしている場合 -->
@@ -72,8 +72,8 @@
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.getElementById('hamburger');
-            const navMenu = document.getElementById('nav-menu');
+            const hamburger = document.querySelector('.js-hamburger');
+            const navMenu = document.querySelector('.js-nav-menu');
 
             if (hamburger && navMenu) {
                 hamburger.addEventListener('click', function() {
