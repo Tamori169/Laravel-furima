@@ -126,7 +126,7 @@ input::placeholder {
 
     .header__logo-image--mobile {
         display: block;
-        width: 28%;
+        width: 20%;
         padding-left: 3%;
     }
 }

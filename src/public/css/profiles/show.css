@@ -218,6 +218,10 @@
         margin-top: 30px;
     }
 
+    .profile__content {
+        display: block;
+    }
+
     .profile__content-wrapper {
         gap: 10%;
         margin: 0 auto;
@@ -246,7 +250,7 @@
     }
 
     .tab__item {
-        width: 26%;
+        width: 29%;
     }
 
     .tab__item:first-child {
