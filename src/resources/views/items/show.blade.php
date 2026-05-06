@@ -42,14 +42,14 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" style="background: none; border: none;">
-                            <img class="action__favorite-icon" src="{{ asset('images/logos/favorite-logo-pink.png') }}" alt="いいね解除">
+                            <img class="action__favorite-icon" src="{{ asset('images/logos/favorite-logo-pink.png') }}" alt="いいねの解除">
                         </button>
                     </form>
                     @else
                     <form action="{{ route('favorite.store', $item->id) }}" method="post">
                         @csrf
                         <button type="submit" style="background: none; border: none;">
-                            <img class="action__favorite-icon" src="{{ asset('images/logos/favorite-logo-default.png') }}" alt="いいね追加">
+                            <img class="action__favorite-icon" src="{{ asset('images/logos/favorite-logo-default.png') }}" alt="いいねの追加">
                         </button>
                     </form>
                     @endif
