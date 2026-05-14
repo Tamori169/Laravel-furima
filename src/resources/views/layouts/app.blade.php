@@ -33,8 +33,8 @@
             </form>
             @show
         </div>
-        @section('nav')
         <nav class="header__nav">
+            @section('nav')
             <div class="hamburger js-hamburger">
                 <span></span>
                 <span></span>
@@ -64,8 +64,8 @@
                     <a href="{{ route('item.create') }}" class="sell__link">出品</a>
                 </div>
             </div>
+            @show
         </nav>
-        @show
     </header>
     <main>
         @yield('content')
