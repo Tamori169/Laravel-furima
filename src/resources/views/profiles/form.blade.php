@@ -78,7 +78,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="postal_code"
-                        value="{{ old('postal_code', $profile->postal_code) }}">
+                        value="{{ old('postal_code', $profile?->postal_code ?? '') }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -99,7 +99,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="address"
-                        value="{{ old('address', $profile->address) }}">
+                        value="{{ old('address', $profile?->address ?? '') }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
@@ -120,7 +120,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
             <div class="form__group-content">
                 <div class="form__item">
                     <input class="form__item-input" type="text" name="building"
-                        value="{{ old('building', $profile->building) }}">
+                        value="{{ old('building', $profile?->building ?? '') }}">
                 </div>
                 <div class="form__error">
                     <span class="form__error-text">
