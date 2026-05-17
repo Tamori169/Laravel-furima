@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 // メール認証後にプロフィール設定画面を呼び出す //
-Route::get('/setup-profile',[ProfileController::class,'create']
-    )->middleware(['auth','verified'])
-    ->name('profile.create');
+// Route::get('/setup-profile',[ProfileController::class,'create']
+//     )->middleware(['auth','verified'])
+//     ->name('profile.create');
 
 // 未認証ユーザが可能な処理 //
 Route::get('/',[ItemController::class,'index'])
@@ -34,7 +34,7 @@ Route::post('/stripe/webhook', [OrderController::class, 'webhook'])
     ->name('stripe.webhook');
 
 // 認証ユーザのみ可能な処理 //
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/item/{item_id}/comment',[CommentController::class,'store'])
         ->name('comment.store');
     Route::post('/item/{item_id}/favorite',[FavoriteController::class,'store'])
@@ -55,6 +55,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('item.create');
     Route::post('/sell',[ItemController::class,'store'])
         ->name('item.store');
+    Route::get('/setup-profile',[ProfileController::class,'create'])
+        ->name('profile.create');
     Route::post('/setup-profile',[ProfileController::class,'store'])
         ->name('profile.store');
     Route::get('/mypage',[ProfileController::class,'show'])

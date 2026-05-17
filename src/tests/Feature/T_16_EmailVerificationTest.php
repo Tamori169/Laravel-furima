@@ -73,4 +73,16 @@ class T_16_EmailVerificationTest extends TestCase
             }
         );
     }
+
+    public function test_メール未認証ユーザーがメール認証必須ページにアクセスしたらメール認証誘導画面に行く()
+    {
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
+
+        $response = $this->actingAs($user)->get('/sell');
+
+        $response->assertRedirect('/email/verify');
+    }
 }

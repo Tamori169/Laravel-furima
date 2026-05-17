@@ -85,15 +85,15 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         // ログインレスポンスのカスタマイズ
-        $this->app->instance(LoginResponseContract::class, new class implements LoginResponseContract {
-            public function toResponse($request) {
-                // 未認証なら認証画面へ
-                if ($request->user() && !$request->user()->hasVerifiedEmail()) {
-                    return redirect()->route('verification.notice');
-                }
-                // 認証済みならトップへ
-                return redirect('/');
-            }
-        });
+        // $this->app->instance(LoginResponseContract::class, new class implements LoginResponseContract {
+        //     public function toResponse($request) {
+        //         // 未認証なら認証画面へ
+        //         if ($request->user() && !$request->user()->hasVerifiedEmail()) {
+        //             return redirect()->route('verification.notice');
+        //         }
+        //         // 認証済みならトップへ
+        //         return redirect('/');
+        //     }
+        // });
     }
 }
