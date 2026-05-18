@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class T_07_ItemShowTest extends TestCase
@@ -32,7 +33,7 @@ class T_07_ItemShowTest extends TestCase
         $response = $this->actingAs($user)->get("/item/{$item->id}");
 
         $response->assertStatus(200);
-        $response->assertSee($item->image);
+        $response->assertSee(Storage::url($item->image), false);
         $response->assertSee($item->name);
         $response->assertSee($item->brand);
         $response->assertSee(number_format($item->price));
@@ -49,7 +50,7 @@ class T_07_ItemShowTest extends TestCase
         $response->assertSee($item->description);
         $response->assertSee($item->categories->first()->name);
         $response->assertSee($item->condition->name);
-        $response->assertSee($user->profile->image);
+        $response->assertSee(Storage::url($user->profile->image), false);
         $response->assertSee($user->name);
         $response->assertSee('テストコメント');
     }

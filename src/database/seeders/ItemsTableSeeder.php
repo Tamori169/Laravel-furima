@@ -122,6 +122,6 @@ class ItemsTableSeeder extends Seeder
             File::get($source)
         );
 
-        return "/storage/images/{$dir}/{$fileName}";
+        return "/images/{$dir}/{$fileName}";
     }
 }

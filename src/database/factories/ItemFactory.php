@@ -18,7 +18,7 @@ class ItemFactory extends Factory
         return [
             'user_id' => \App\Models\User::factory(),
             'name' => $this->faker->word(),
-            'image' => $this->faker->lexify('profile_id_????') . '.png',
+            'image' => $this->faker->lexify('images/profiles/profile_id_????') . '.png',
             'price' => $this->faker->randomNumber(5),
             'brand' => $this->faker->company(),
             'description' => $this->faker->sentence(),

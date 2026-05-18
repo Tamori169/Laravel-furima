@@ -63,12 +63,7 @@ class ItemController extends Controller
 
     public function store(SellRequest $request)
     {
-        $imagePath = null;
-
-        $file = $request->file('image');
-        $fileName = uniqid() . '_' . $file->getClientOriginalName();
-        $file->storeAs('images/items', $fileName, 'public');
-        $imagePath = '/storage/images/items/' . $fileName;
+        $imagePath = $request->image->store('images/items', 'public');
 
         $item = Item::create([
             'user_id'        => auth()->id(),

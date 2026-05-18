@@ -13,8 +13,7 @@
             <div class="form__item-info">
                 <!-- 商品画像 -->
                 <div class="form__image-wrapper">
-                    <img class="form__image" src="{{ asset($item->image) }}"
-                        alt="{{ $item->name }}">
+                    <img class="form__image" src="{{ Storage::url($item->image) }}"alt="{{ $item->name }}">
                 </div>
                 <div class="form__info-wrapper">
                     <!-- 商品名 -->

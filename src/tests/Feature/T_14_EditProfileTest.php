@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class T_14_EditProfileTest extends TestCase
@@ -31,7 +32,7 @@ class T_14_EditProfileTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertSee('value="テストユーザー"', false);
-        $response->assertSee('src="' . asset('images/profiles/test_image.jpeg') . '"', false);
+        $response->assertSee('src="' . Storage::url('images/profiles/test_image.jpeg') . '"', false);
         $response->assertSee('value="123-4567"', false);
         $response->assertSee('value="東京都渋谷区"', false);
         $response->assertSee('value="渋谷ビル101"', false);

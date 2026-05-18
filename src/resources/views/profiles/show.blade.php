@@ -12,7 +12,7 @@
         <div class="profile__content-wrapper">
             <!-- プロフィール画像 -->
             <div class="profile__image">
-                <img class="profile__image-item" src="{{ $profile && $profile->image ? asset($profile->image) : asset('images/profiles/profile-image-gray.jpeg') }}">
+                <img class="profile__image-item" src="{{ $profile && $profile->image ? Storage::url($profile->image) : asset('images/profiles/profile-image-gray.jpeg') }}">
             </div>
             <!-- 名前 -->
             <div class="profile__name">
@@ -46,7 +46,7 @@
         <div class="item-card">
             <a class="item-card__link" href="{{ route('item.show', $item->id) }}">
                 <div class="item-card__image-wrapper">
-                    <img class="item-card__image" src="{{ asset($item->image) }}" alt="{{ $item->name }}">
+                    <img class="item-card__image" src="{{ Storage::url($item->image) }}" alt="{{ $item->name }}">
                     @if($item->order)
                     <div class="item-card__sold">
                         <span class="item-card__sold-text">

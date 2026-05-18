@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class T_13_MyPageTest extends TestCase
@@ -43,13 +44,13 @@ class T_13_MyPageTest extends TestCase
         $response = $this->actingAs($user)->get('/mypage?page=sell');
         $response->assertStatus(200);
         $response->assertSee($user->name);
-        $response->assertSee($profile->image);
+        $response->assertSee(Storage::url($user->profile->image), false);
         $response->assertSee($item1->name);
 
         $response = $this->actingAs($user)->get('/mypage?page=buy');
         $response->assertStatus(200);
         $response->assertSee($user->name);
-        $response->assertSee($profile->image);
+        $response->assertSee(Storage::url($user->profile->image), false);
         $response->assertSee($item2->name);
         $response->assertDontSee($item3->name);
     }

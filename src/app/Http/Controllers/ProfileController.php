@@ -23,10 +23,7 @@ class ProfileController extends Controller
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = uniqid() . '_' . $file->getClientOriginalName();
-            $file->storeAs('images/profiles', $fileName, 'public');
-            $imagePath = '/storage/images/profiles/' . $fileName;
+            $imagePath = $request->image->store('images/profiles', 'public');
         }
 
         Profile::create([
@@ -82,10 +79,7 @@ class ProfileController extends Controller
         $imagePath = $profile->image;
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = uniqid() . '_' . $file->getClientOriginalName();
-            $file->storeAs('images/profiles', $fileName, 'public');
-            $imagePath = '/storage/images/profiles/' . $fileName;
+            $imagePath = $request->image->store('images/profiles', 'public');
         }
 
         $profile->update([

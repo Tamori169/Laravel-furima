@@ -29,7 +29,7 @@ $route = $isUpdate ? route('profile.update') : route('profile.store');
                 <div class="form__image-preview">
                     <img class="form__image-item js-preview"
                         src="{{ $profile && $profile->image
-                    ? asset($profile->image) : asset('images/profiles/profile-image-gray.jpeg') }}">
+                    ? Storage::url($profile->image) : asset('images/profiles/profile-image-gray.jpeg') }}">
                 </div>
                 <div class="form__image-upload">
                     <label class="form__image-file" for="image-upload">
