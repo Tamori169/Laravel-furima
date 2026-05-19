@@ -21,7 +21,6 @@ class OrderController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
         $item = Item::findOrFail($item_id);
-        $isSold = Order::where('item_id', $item_id)->exists();
 
         $address = (object)session('custom_address', [
             'postal_code' => optional($profile)->postal_code ?? '',
@@ -29,7 +28,7 @@ class OrderController extends Controller
             'building'    => optional($profile)->building ?? '',
         ]);
 
-        return view('orders.create', compact('item', 'profile', 'address', 'item_id', 'isSold'));
+        return view('orders.create', compact('item', 'profile', 'address', 'item_id'));
     }
 
     public function edit($item_id)

@@ -47,7 +47,7 @@
             <a class="item-card__link" href="{{ route('item.show', $item->id) }}">
                 <div class="item-card__image-wrapper">
                     <img class="item-card__image" src="{{ Storage::url($item->image) }}" alt="{{ $item->name }}">
-                    @if($item->order)
+                    @if($item->is_sold)
                     <div class="item-card__sold">
                         <span class="item-card__sold-text">
                             Sold

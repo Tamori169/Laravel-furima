@@ -67,7 +67,7 @@
             </div>
             <!-- 購入手続き -->
             <div class="purchase__button">
-                @if($isSold)
+                @if($item->is_sold)
                 <button class="sold__button" disabled>
                     売り切れ
                 </button>

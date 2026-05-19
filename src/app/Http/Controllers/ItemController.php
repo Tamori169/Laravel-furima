@@ -48,9 +48,7 @@ class ItemController extends Controller
                 ->withCount('comments','favorites')
                 ->findOrFail($item_id);
 
-        $isSold = Order::where('item_id', $item_id)->exists();
-
-        return view('items.show',compact('item','isSold'));
+        return view('items.show',compact('item'));
     }
 
     public function create()

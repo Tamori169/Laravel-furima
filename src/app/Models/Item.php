@@ -45,6 +45,11 @@ class Item extends Model
         return $this->hasOne(Order::class);
     }
 
+    public function getIsSoldAttribute()
+    {
+        return $this->order !== null;
+    }
+
     public function favorites()
     {
         return $this->belongsToMany(User::class, 'favorites')

@@ -117,7 +117,7 @@
             </table>
             <!-- 購入ボタン -->
             <div class="purchase__button">
-                @if($isSold)
+                @if($item->is_sold)
                 <button class="purchase__button--sold" disabled>
                     売り切れ
                 </button>
