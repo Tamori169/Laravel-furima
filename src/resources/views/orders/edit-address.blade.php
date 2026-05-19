@@ -12,7 +12,7 @@
             住所の変更
         </h1>
     </div>
-    <form class="form" action="{{ route('order.update', ['item_id' => $item->id]) }}" method="POST" novalidate>
+    <form class="form" action="{{ route('order.update', ['item_id' => $item->id, 'payment_method' => $paymentMethod ?? null]) }}" method="POST" novalidate>
         @csrf
         @method('PATCH')
         <!-- 郵便番号 -->

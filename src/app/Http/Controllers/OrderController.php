@@ -16,7 +16,7 @@ use UnexpectedValueException;
 
 class OrderController extends Controller
 {
-    public function create($item_id)
+    public function create(Request $request, $item_id)
     {
         $user = Auth::user();
         $profile = $user->profile;
@@ -28,15 +28,19 @@ class OrderController extends Controller
             'building'    => optional($profile)->building ?? '',
         ]);
 
-        return view('orders.create', compact('item', 'profile', 'address', 'item_id'));
+        $paymentMethod = $request->query('payment_method');
+
+        return view('orders.create', compact('item', 'profile', 'address', 'item_id', 'paymentMethod'));
     }
 
-    public function edit($item_id)
+    public function edit(Request $request, $item_id)
     {
         $user = Auth::user();
         $item = Item::findOrFail($item_id);
 
-        return view('orders.edit-address',compact('user','item'));
+        $paymentMethod = $request->query('payment_method');
+
+        return view('orders.edit-address', compact('user', 'item', 'paymentMethod'));
     }
 
     public function update(AddressRequest $request, $item_id)
@@ -44,7 +48,10 @@ class OrderController extends Controller
         $address = $request->only(['postal_code', 'address', 'building']);
         session(['custom_address' => $address]);
 
-        return redirect()->route('order.create', ['item_id' => $item_id]);
+        return redirect()->route('order.create', [
+            'item_id' => $item_id,
+            'payment_method' => $request->query('payment_method'),
+        ]);
     }
 
     public function store(PurchaseRequest $request, $item_id)

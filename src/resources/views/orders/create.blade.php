@@ -39,10 +39,13 @@
                     </h2>
                 </div>
                 <div class="form__payment-method--content">
+                    @php
+                    $selectedPayment = old('payment_method', $paymentMethod ?? '');
+                    @endphp
                     <select class="form__payment-method--select" name="payment_method" id="payment-select">
-                        <option class="form__payment-method--option" value="" selected disabled>選択してください</option>
-                        <option class="form__payment-method--option" value="コンビニ払い">コンビニ払い</option>
-                        <option class="form__payment-method--option" value="カード支払い">カード支払い</option>
+                        <option class="form__payment-method--option" value="" disabled {{ $selectedPayment === '' ? 'selected' : '' }}>選択してください</option>
+                        <option class="form__payment-method--option" value="コンビニ払い" {{ $selectedPayment === 'コンビニ払い' ? 'selected' : '' }}>コンビニ払い</option>
+                        <option class="form__payment-method--option" value="カード支払い" {{ $selectedPayment === 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
                     </select>
                 </div>
                 <div class="form__error">
@@ -89,7 +92,7 @@
                 </div>
                 <!-- 配送先変更 -->
                 <div class="shipping-address__edit">
-                    <a class="shipping-address__edit-link" href="{{ route('order.edit', $item->id) }}">
+                    <a class="shipping-address__edit-link" id="shipping-address-edit-link" href="{{ route('order.edit', ['item_id' => $item->id, 'payment_method' => $selectedPayment ?: null]) }}">
                         変更する
                     </a>
                 </div>
@@ -111,7 +114,7 @@
                         支払い方法
                     </th>
                     <td class="purchase-table__payment-method" id="display-payment">
-                        {{ session('payment_method', 'ー') }}
+                        {{ $selectedPayment ?: 'ー' }}
                     </td>
                 </tr>
             </table>
@@ -140,10 +143,22 @@
     document.addEventListener('DOMContentLoaded', function() {
         const select = document.getElementById('payment-select');
         const display = document.getElementById('display-payment');
+        const addressLink = document.getElementById('shipping-address-edit-link');
 
-        select.addEventListener('change', function() {
-            display.textContent = select.value;
-        });
+        const syncPaymentMethod = function() {
+            display.textContent = select.value || 'ー';
+
+            const url = new URL(addressLink.href);
+            if (select.value) {
+                url.searchParams.set('payment_method', select.value);
+            } else {
+                url.searchParams.delete('payment_method');
+            }
+            addressLink.href = url.toString();
+        };
+
+        syncPaymentMethod();
+        select.addEventListener('change', syncPaymentMethod);
     });
 </script>
 
