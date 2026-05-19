@@ -75,7 +75,6 @@ class T_10_OrderTest extends TestCase
         $response->assertRedirect('https://checkout.stripe.com/test-url-konbini');
     }
 
-    // 購入した商品は商品一覧画面にて「sold」と表示される
 
     public function test_購入した商品は商品一覧画面にて「sold」と表示される()
     {
@@ -114,5 +113,21 @@ class T_10_OrderTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee($item->name);
+    }
+
+    public function test_出品者自身は購入手続きに進めない()
+    {
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+
+        $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
+        $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
+        $item = Item::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->get("/purchase/{$item->id}");
+
+        $response->assertStatus(200);
+        $response->assertSee('出品者のため購入不可');
+        $response->assertDontSee('購入する');
     }
 }

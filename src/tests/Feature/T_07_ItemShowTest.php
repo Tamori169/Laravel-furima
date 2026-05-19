@@ -72,4 +72,20 @@ class T_07_ItemShowTest extends TestCase
             $response->assertSee($category->name);
         }
     }
+
+    public function test_出品者自身は購入手続きに進めない()
+    {
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+
+        $this->seed(\Database\Seeders\ConditionsTableSeeder::class);
+        $this->seed(\Database\Seeders\CategoriesTableSeeder::class);
+        $item = Item::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->get("/item/{$item->id}");
+
+        $response->assertStatus(200);
+        $response->assertSee('出品者のため購入不可');
+        $response->assertDontSee('購入手続きへ');
+    }
 }

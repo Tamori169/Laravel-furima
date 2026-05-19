@@ -144,7 +144,8 @@
 }
 
 .purchase__button-submit,
-.purchase__button--sold {
+.purchase__button--sold,
+.purchase__button--owner {
     width: 100%;
     color: #fff;
     border-radius: 3px;
@@ -163,7 +164,8 @@
     background-color: #cc0000;
 }
 
-.purchase__button--sold {
+.purchase__button--sold,
+.purchase__button--owner {
     background-color: #444;
 }
 

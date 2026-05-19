@@ -32,7 +32,8 @@
 .item-detail__specs,
 .item-detail__comments,
 .purchase__button,
-.sold__button {
+.sold__button,
+.purchase__button--owner {
     width: 100%;
 }
 
@@ -89,7 +90,8 @@
 
 .purchase__link,
 .comment__form-submit,
-.sold__button {
+.sold__button,
+.purchase__button--owner {
     color: #fff;
     border-radius: 3px;
     padding: 10px 25px;
@@ -109,7 +111,8 @@
     background-color: #cc0000;
 }
 
-.sold__button {
+.sold__button,
+.purchase__button--owner {
     background-color: #444;
 }
 

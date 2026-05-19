@@ -67,7 +67,11 @@
             </div>
             <!-- 購入手続き -->
             <div class="purchase__button">
-                @if($item->is_sold)
+                @if($item->is_owner)
+                <button class="purchase__button--owner" disabled>
+                    出品者のため購入不可
+                </button>
+                @elseif($item->is_sold)
                 <button class="sold__button" disabled>
                     売り切れ
                 </button>

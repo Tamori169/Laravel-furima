@@ -117,7 +117,11 @@
             </table>
             <!-- 購入ボタン -->
             <div class="purchase__button">
-                @if($item->is_sold)
+                @if($item->is_owner)
+                <button class="purchase__button--owner" disabled>
+                    出品者のため購入不可
+                </button>
+                @elseif($item->is_sold)
                 <button class="purchase__button--sold" disabled>
                     売り切れ
                 </button>

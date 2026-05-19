@@ -24,6 +24,11 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getIsOwnerAttribute()
+    {
+        return auth()->check() && $this->user_id === auth()->id();
+    }
+
     public function condition()
     {
         return $this->belongsTo(Condition::class);
