@@ -60,4 +60,13 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'favorites')
                     ->withTimestamps();
     }
+
+    public function scopeSearchKeyword($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+
+        return $query;
+    }
 }

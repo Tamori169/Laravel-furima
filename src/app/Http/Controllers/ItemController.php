@@ -19,11 +19,7 @@ class ItemController extends Controller
         $keyword = $request->query('keyword');
         $tab = $request->query('tab');
 
-        $query = Item::with('order');
-
-        $query->when($keyword, function ($q) use ($keyword) {
-            return $q->where('name', 'like', '%' . $keyword . '%');
-        });
+        $query = Item::with('order')->searchKeyword($keyword);
 
         if ($tab === 'mylist') {
             if ($myId) {
