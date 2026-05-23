@@ -6,14 +6,14 @@
 
 @section('content')
 <div class="purchase-form">
-    <form class="form" action="{{ route('order.store', $item->id) }}" method="post" target="_blank">
+    <form class="form" action="{{ route('order.store', $item->id) }}" method="post">
         @csrf
         <!-- 画面左側 -->
         <div class="form__left-wrapper">
             <div class="form__item-info">
                 <!-- 商品画像 -->
                 <div class="form__image-wrapper">
-                    <img class="form__image" src="{{ Storage::url($item->image) }}"alt="{{ $item->name }}">
+                    <img class="form__image" src="{{ Storage::url($item->image) }}" alt="{{ $item->name }}">
                 </div>
                 <div class="form__info-wrapper">
                     <!-- 商品名 -->
@@ -92,9 +92,9 @@
                 </div>
                 <!-- 配送先変更 -->
                 <div class="shipping-address__edit">
-                    <a class="shipping-address__edit-link" id="shipping-address-edit-link" href="{{ route('order.edit', ['item_id' => $item->id, 'payment_method' => $selectedPayment ?: null]) }}">
+                    <button class="shipping-address__edit-button" formaction="{{ route('order.edit', $item->id) }}" type="submit">
                         変更する
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -129,7 +129,8 @@
                     売り切れ
                 </button>
                 @else
-                <button class="purchase__button-submit" type="submit">
+                <button class="purchase__button-submit" formaction="{{ route('order.store', $item->id) }}"
+                    type="submit" formtarget="_blank">
                     購入する
                 </button>
                 @endif
@@ -143,18 +144,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const select = document.getElementById('payment-select');
         const display = document.getElementById('display-payment');
-        const addressLink = document.getElementById('shipping-address-edit-link');
 
         const syncPaymentMethod = function() {
             display.textContent = select.value || 'ー';
-
-            const url = new URL(addressLink.href);
-            if (select.value) {
-                url.searchParams.set('payment_method', select.value);
-            } else {
-                url.searchParams.delete('payment_method');
-            }
-            addressLink.href = url.toString();
         };
 
         syncPaymentMethod();

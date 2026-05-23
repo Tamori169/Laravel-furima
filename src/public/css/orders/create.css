@@ -114,8 +114,13 @@
     text-align: right;
 }
 
-.shipping-address__edit-link {
+.shipping-address__edit-button {
     text-decoration: none;
+    color: blue;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .purchase-table {

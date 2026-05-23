@@ -28,7 +28,7 @@ class OrderController extends Controller
             'building'    => optional($profile)->building ?? '',
         ]);
 
-        $paymentMethod = $request->query('payment_method');
+        $paymentMethod = session('payment_method', '');
 
         return view('orders.create', compact('item', 'profile', 'address', 'item_id', 'paymentMethod'));
     }
@@ -38,9 +38,12 @@ class OrderController extends Controller
         $user = Auth::user();
         $item = Item::findOrFail($item_id);
 
-        $paymentMethod = $request->query('payment_method');
+        if ($request->filled('payment_method')) {
+            $paymentMethod = $request->payment_method;
+            session(['payment_method' => $paymentMethod]);
+        }
 
-        return view('orders.edit-address', compact('user', 'item', 'paymentMethod'));
+        return view('orders.edit-address', compact('user', 'item'));
     }
 
     public function update(AddressRequest $request, $item_id)
@@ -48,10 +51,8 @@ class OrderController extends Controller
         $address = $request->only(['postal_code', 'address', 'building']);
         session(['custom_address' => $address]);
 
-        return redirect()->route('order.create', [
-            'item_id' => $item_id,
-            'payment_method' => $request->query('payment_method'),
-        ]);
+
+        return redirect()->route('order.create', ['item_id' => $item_id]);
     }
 
     public function store(PurchaseRequest $request, $item_id)
