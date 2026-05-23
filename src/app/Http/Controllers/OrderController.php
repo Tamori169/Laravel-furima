@@ -22,6 +22,10 @@ class OrderController extends Controller
         $profile = $user->profile;
         $item = Item::findOrFail($item_id);
 
+        if ($item->is_owner) {
+            abort(403);
+        }
+
         $address = (object)session('custom_address', [
             'postal_code' => optional($profile)->postal_code ?? '',
             'address'     => optional($profile)->address ?? '',
@@ -58,6 +62,10 @@ class OrderController extends Controller
     public function store(PurchaseRequest $request, $item_id)
     {
         $item = Item::findOrFail($item_id);
+
+        if ($item->is_owner) {
+            abort(403);
+        }
 
         Stripe::setApiKey(config('services.stripe.secret'));
 
